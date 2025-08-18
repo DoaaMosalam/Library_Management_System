@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kaptKotlin)
     // KSP plugin
     alias(libs.plugins.kspkotlin)
+
 }
 
 android {
