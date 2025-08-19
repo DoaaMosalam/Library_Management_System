@@ -6,4 +6,6 @@ plugins {
 
     alias(libs.plugins.hilt.plugin) apply false
     alias(libs.plugins.kspkotlin.plugin)
+    alias(libs.plugins.google.gms.google.services) apply false
+    alias(libs.plugins.google.firebase.crashlytics) apply false
 }

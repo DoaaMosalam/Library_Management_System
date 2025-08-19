@@ -11,6 +11,8 @@ constraintlayout = "2.2.1"
 navigationFragmentKtx = "2.9.3"
 navigationUiKtx = "2.9.3"
 picasso = "2.8"
+reactivenetworkRx2 = "3.0.8"
+reactivenetworkRx3 = "3.1.0"
 recyclerview = "1.4.0"
 cardview = "1.0.0"
 retrofit = "3.0.0"
@@ -29,6 +31,9 @@ targetSdk = "36"
 databindingRuntime = "8.12.0"
 activity = "1.10.1"
 coreSplashscreen = "1.0.1"
+firebaseCrashlytics = "20.0.0"
+googleGmsGoogleServices = "4.4.3"
+googleFirebaseCrashlytics = "3.0.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -58,6 +63,7 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidx-databinding-runtime = { group = "androidx.databinding", name = "databinding-runtime", version.ref = "databindingRuntime" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -69,6 +75,8 @@ kaptKotlin = {id="org.jetbrains.kotlin.kapt"}
 
 kspkotlin_plugin =  {id="com.google.devtools.ksp",version.ref = "kspkotlindeve"}
 kspkotlin = {id = "com.google.devtools.ksp"}
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
 
 
 

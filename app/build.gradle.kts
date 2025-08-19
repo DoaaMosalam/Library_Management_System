@@ -8,6 +8,8 @@ plugins {
     alias(libs.plugins.kaptKotlin)
     // KSP plugin
     alias(libs.plugins.kspkotlin)
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.firebase.crashlytics)
 
 }
 
@@ -60,6 +62,8 @@ dependencies {
     implementation(libs.androidx.activity)
     // Splash Screen
     implementation(libs.androidx.core.splashscreen)
+    // Firebase
+    implementation(libs.firebase.crashlytics)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -1,7 +1,5 @@
 package com.doaa.mosalam.librarymanagementsystem.common
 
-import android.app.LocaleManager
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity

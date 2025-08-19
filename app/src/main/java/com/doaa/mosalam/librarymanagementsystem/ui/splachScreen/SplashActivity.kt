@@ -8,22 +8,14 @@ import android.os.Build
 import android.os.Bundle
 import android.view.animation.AnticipateInterpolator
 import android.view.animation.BounceInterpolator
-import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.animation.doOnEnd
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.splashscreen.SplashScreenViewProvider
 import com.doaa.mosalam.librarymanagementsystem.MainActivity
-import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.common.BasicActivity
-import com.doaa.mosalam.librarymanagementsystem.databinding.ActivityMainBinding
 import com.doaa.mosalam.librarymanagementsystem.databinding.ActivitySplashBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.text.compareTo
 
 @AndroidEntryPoint
 class SplashActivity : BasicActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
@@ -38,7 +30,7 @@ class SplashActivity : BasicActivity<ActivitySplashBinding>(ActivitySplashBindin
     }
 
     private fun animationIcon() {
-        val logo = findViewById<ImageView>(R.id.logoImage)
+        val logo = binding.imageMotion
 
         // Animation 1: move to the top
         val moveUp = ObjectAnimator.ofFloat(logo, "translationY", 0f, -300f).apply {

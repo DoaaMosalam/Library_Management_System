@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.doaa.mosalam.librarymanagementsystem" />
+                  <option name="mobileSdkAppId" value="1:569681346766:android:e6d3ecd1c3beba2fdc509f" />
+                  <option name="projectId" value="librarymanagementsystem-26dbc" />
+                  <option name="projectNumber" value="569681346766" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
