@@ -3,167 +3,173 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <data>
-        <!-- Declare any variables or imports here if needed -->
+        <!-- Variables لو محتاج تعمل Binding -->
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.register.RegisterFragment">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image_logo"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:src="@drawable/logo_comp_app"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameTilRegister"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:helperText="*"
-        app:helperTextTextColor="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_logo">
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".ui.register.RegisterFragment">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_nameRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_100dp"
-            android:layout_marginBottom="@dimen/_10dp"
-            android:layout_marginStart="@dimen/_5dp"
-            android:layout_marginEnd="@dimen/_5dp"
-            android:background="@drawable/design_input"
-            android:drawableStart="@drawable/person_24dp"
-            android:hint="@string/full_name"
-            android:padding="20dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <!-- Logo -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_logo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/logo_comp_app"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneTilRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:helperText="*"
-        app:helperTextTextColor="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTilRegister">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Country Code Picker -->
-        <com.hbb20.CountryCodePicker
-            android:id="@+id/countryCodePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:ccp_showFlag="true"
-            app:ccp_showFullName="false"
-            app:ccp_showNameCode="false"
-            app:ccp_showPhoneCode="true"
-            app:ccp_defaultNameCode="EG" />
-
-        <!-- Phone Input -->
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_phoneRegister"
+        <!-- Name -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameTilRegister"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginBottom="@dimen/_10dp"
-            android:layout_marginStart="@dimen/_5dp"
-            android:layout_marginEnd="@dimen/_5dp"
-            android:background="@drawable/design_input"
-            android:drawableStart="@drawable/baseline_phone_24"
-            android:hint="@string/phone_number"
-            android:padding="20dp" />
-    </LinearLayout>
-</com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passworrdTilRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:helperText="*"
-        app:helperTextTextColor="@color/red"
-        android:layout_marginBottom="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneTilRegister"
-        app:passwordToggleEnabled="true">
+            app:helperText="*"
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintTop_toBottomOf="@id/image_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_PasswordRegister"
-            android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_nameRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/design_input"
+                android:drawableStart="@drawable/person_24dp"
+                android:hint="@string/full_name"
+                android:padding="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailTilLRegister"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:autofillHints="Password"
-            android:drawableStart="@drawable/lock_24dp_e3e3e3"
-            android:ems="10"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:background="@drawable/design_input"
-            android:padding="@dimen/_20dp"
-            android:layout_marginBottom="@dimen/_10dp"
-            android:layout_marginStart="@dimen/_5dp"
-            android:layout_marginEnd="@dimen/_5dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            app:helperText="*"
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintTop_toBottomOf="@id/nameTilRegister"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_emailRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/design_input"
+                android:drawableStart="@drawable/email_24dp_e3e3e3"
+                android:hint="@string/email"
+                android:padding="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/confirm_passworrdTilRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:helperText="*"
-        app:helperTextTextColor="@color/red"
-        app:layout_constraintTop_toBottomOf="@+id/passworrdTilRegister"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="@dimen/_100dp"
-        app:passwordToggleEnabled="true">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_confirm_passworrdRegister"
-            android:layout_width="match_parent"
+        <!-- Phone -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneTilRegister"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_100dp"
-            android:layout_marginBottom="@dimen/_10dp"
-            android:autofillHints="Password"
-            android:drawableStart="@drawable/lock_24dp_e3e3e3"
-            android:background="@drawable/design_input"
-            android:ems="10"
-            android:hint="@string/confirmpassword"
-            android:inputType="textPassword"
-            android:padding="@dimen/_20dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:helperText="*"
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintTop_toBottomOf="@id/emailTilLRegister"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_background"
-        android:enabled="true"
-        android:gravity="center"
-        android:text="Register"
-        app:layout_constraintTop_toBottomOf="@+id/confirm_passworrdTilRegister"
-        android:textColor="@drawable/status_text_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/countryCodePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:ccp_showFlag="true"
+                    app:ccp_showFullName="false"
+                    app:ccp_showNameCode="false"
+                    app:ccp_showPhoneCode="true"
+                    app:ccp_defaultNameCode="EG" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_phoneRegister"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/design_input"
+                    android:drawableStart="@drawable/baseline_phone_24"
+                    android:hint="@string/phone_number"
+                    android:padding="16dp" />
+            </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passworrdTilRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:helperText="*"
+            app:helperTextTextColor="@color/red"
+            app:passwordToggleEnabled="true"
+            app:layout_constraintTop_toBottomOf="@id/phoneTilRegister"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_PasswordRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Password"
+                android:drawableStart="@drawable/lock_24dp_e3e3e3"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:background="@drawable/design_input"
+                android:padding="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Confirm Password -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirm_passworrdTilRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:helperText="*"
+            app:helperTextTextColor="@color/red"
+            app:passwordToggleEnabled="true"
+            app:layout_constraintTop_toBottomOf="@id/passworrdTilRegister"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_confirm_passworrdRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Password"
+                android:drawableStart="@drawable/lock_24dp_e3e3e3"
+                android:hint="@string/confirmpassword"
+                android:inputType="textPassword"
+                android:background="@drawable/design_input"
+                android:padding="16dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Register Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_background"
+            android:enabled="true"
+            android:text="@string/register"
+            android:textColor="@drawable/status_text_color"
+            app:layout_constraintTop_toBottomOf="@id/confirm_passworrdTilRegister"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
