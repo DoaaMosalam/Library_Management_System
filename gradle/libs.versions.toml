@@ -1,5 +1,7 @@
 [versions]
 agp = "8.11.1"
+ccp = "2.7.3"
+circleimageview = "3.1.0"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -34,9 +36,13 @@ coreSplashscreen = "1.0.1"
 firebaseCrashlytics = "20.0.0"
 googleGmsGoogleServices = "4.4.3"
 googleFirebaseCrashlytics = "3.0.6"
+annotation = "1.9.1"
+lifecycleLivedataKtx = "2.9.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+ccp = { module = "com.hbb20:ccp", version.ref = "ccp" }
+circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -64,6 +70,8 @@ androidx-databinding-runtime = { group = "androidx.databinding", name = "databin
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
+androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
+androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

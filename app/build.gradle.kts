@@ -45,6 +45,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -64,6 +65,8 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     // Firebase
     implementation(libs.firebase.crashlytics)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -100,5 +103,12 @@ dependencies {
 //    ksp(libs.androidx.room.compiler)
     kapt(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+
+    // circle image view
+
+    implementation (libs.circleimageview)
+
+    //countyCode
+    implementation(libs.ccp)
 
 }
