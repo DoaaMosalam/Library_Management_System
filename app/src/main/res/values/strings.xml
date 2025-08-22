@@ -34,4 +34,13 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="remember_me">Remember me</string>
     <string name="bookly">| Bookly</string>
+    <string name="search_books_author">Search Books, Author...</string>
+    <string name="myshelf">MyShelf</string>
+    <string name="username">UserName</string>
+    <string name="discovery_your_next">Discovery Your Next </string>
+    <string name="favorite_book"> Favorite Book</string>
+    <string name="explore_thousands_of_books_available_for_rent_nno_commitments_just_great_reads">Explore thousands of books available for rent.\nNo commitments, just great reads.</string>
+    <string name="browse_collection">Browse Collection</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="reset_password">Reset Password</string>
 </resources>

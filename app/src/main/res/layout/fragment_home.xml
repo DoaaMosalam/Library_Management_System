@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <!-- Declare any variables here if needed -->
     </data>
@@ -11,21 +11,208 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@color/light_cream">
 
-        <androidx.recyclerview.widget.RecyclerView
-
-            android:id="@+id/recyclerView"
+        <!--        <com.google.android.material.appbar.MaterialToolbar-->
+        <!--            android:id="@+id/topBar"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:contentInsetStartWithNavigation="0dp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/headerLayout"-->
+        <!--            app:layout_scrollFlags="scroll|enterAlways"-->
+        <!--            app:title="">-->
+        <LinearLayout
+            android:id="@+id/mainLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+
+            <!-- Header -->
+            <LinearLayout
+                android:id="@+id/headerLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatCheckedTextView
+                    android:id="@+id/appName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="5dp"
+                    android:text="Bookly | "
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_logo"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/ntg_logo_digital_transformation" />
+
+            </LinearLayout>
+            <!--search -->
+            <LinearLayout
+                android:id="@+id/searchLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:backgroundTint="@color/peach_beige"
+                android:background="@drawable/design_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/headerLayout">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_search"
+                    android:background="@color/ochre_burnt_orange"
+                    android:padding="@dimen/_10dp"
+                    android:layout_marginStart="16dp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/design_search"
+                    android:drawableStart="@drawable/ic_search"
+                    android:hint="@string/search_books_author"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:padding="@dimen/_10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
+            </LinearLayout>
+            <!-- User Layout -->
+            <LinearLayout
+                android:id="@+id/userLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toTopOf="@id/searchLayout"
+                app:layout_constraintBottom_toBottomOf="@id/searchLayout"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/myshelf"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="12dp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_favorite_border"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_marginEnd="8dp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/baseline_notifications_none_24"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/username"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-condensed-light" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Discover Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/discoverCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainLayout">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/peach_beige"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvSentence"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/discovery_your_next"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tvFavorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/favorite_book"
+                        android:textStyle="bold"
+                        android:textSize="25sp"
+                        android:textColor="@color/ochre_burnt_orange" />
+                </LinearLayout>
+
+                <!-- Description -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/explore_thousands_of_books_available_for_rent_nno_commitments_just_great_reads"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <!-- Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBrowse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/ochre_burnt_orange"
+                    android:text="@string/browse_collection"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="16dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--        </com.google.android.material.appbar.MaterialToolbar>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

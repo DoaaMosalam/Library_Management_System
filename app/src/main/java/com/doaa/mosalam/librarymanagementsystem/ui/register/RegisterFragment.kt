@@ -1,11 +1,15 @@
 package com.doaa.mosalam.librarymanagementsystem.ui.register
 
+
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
@@ -15,36 +19,62 @@ import com.doaa.mosalam.librarymanagementsystem.utils.InputValidator
 import com.doaa.mosalam.librarymanagementsystem.utils.isEmailValid
 import com.doaa.mosalam.librarymanagementsystem.utils.isNameValid
 import com.doaa.mosalam.librarymanagementsystem.utils.isPasswordValid
-import com.doaa.mosalam.librarymanagementsystem.utils.isPhoneValid
+import dagger.hilt.android.AndroidEntryPoint
 
-class RegisterFragment() : BasicFragment<FragmentRegisterBinding, RegisterViewModel>(),
-    TextWatcher {
+@AndroidEntryPoint
+class RegisterFragment : BasicFragment<FragmentRegisterBinding, RegisterViewModel>(), TextWatcher {
+
+    private val vm: RegisterViewModel by viewModels()
+    override val viewModel: RegisterViewModel
+        get() = vm
+
+    private lateinit var checkIcon: Drawable
+
     override fun getLayoutResID(): Int = R.layout.fragment_register
 
-    override val viewModel: RegisterViewModel = RegisterViewModel()
-    private lateinit var checkIcon: Drawable
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkIcon = ContextCompat.getDrawable(requireActivity(), R.drawable.baseline_check_24)!!
 
-        initListener()
         initTextWatcher()
         initFocusListeners()
-    }
 
-    private fun initListener() {
-        binding.btnRegister.setOnClickListener { v ->
-            v.findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+        // تفعيل الزر حسب الحالة
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            vm.isRegisterEnabled.collect { binding.btnRegister.isEnabled = it }
         }
 
-    }
+        // زر التسجيل
+        binding.btnRegister.setOnClickListener {
+            vm.registerUser()
+        }
 
-    private fun initFocusListeners() {
-        InputValidator.addFocusListener(binding.edNameRegister) { validateName() }
-//        InputValidator.addFocusListener(binding.edPhoneRegister) { validatePhone() }
-        InputValidator.addFocusListener(binding.edEmailRegister) { validateEmail() }
-        InputValidator.addFocusListener(binding.edPasswordRegister) { validatePassword() }
-        InputValidator.addFocusListener(binding.edConfirmPasswordRegister) { validateConfirmPassword() }
+        // مراقبة الحالة
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            vm.uiState.collect { state ->
+                when (state) {
+                    is RegisterViewModel.UiState.Loading -> {
+                        // show progress
+                    }
+
+                    is RegisterViewModel.UiState.Success -> {
+                        Toast.makeText(
+                            requireContext(),
+                            "Registration Successful",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        view.findNavController()
+                            .navigate(R.id.action_registerFragment_to_loginFragment)
+                    }
+
+                    is RegisterViewModel.UiState.Error -> {
+                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    }
+
+                    else -> Unit
+                }
+            }
+        }
     }
 
     private fun initTextWatcher() {
@@ -53,7 +83,13 @@ class RegisterFragment() : BasicFragment<FragmentRegisterBinding, RegisterViewMo
         binding.edEmailRegister.addTextChangedListener(this)
         binding.edPasswordRegister.addTextChangedListener(this)
         binding.edConfirmPasswordRegister.addTextChangedListener(this)
+    }
 
+    private fun initFocusListeners() {
+        InputValidator.addFocusListener(binding.edNameRegister) { validateName() }
+        InputValidator.addFocusListener(binding.edEmailRegister) { validateEmail() }
+        InputValidator.addFocusListener(binding.edPasswordRegister) { validatePassword() }
+        InputValidator.addFocusListener(binding.edConfirmPasswordRegister) { validateConfirmPassword() }
     }
 
     private fun validateName(): Boolean {
@@ -64,15 +100,6 @@ class RegisterFragment() : BasicFragment<FragmentRegisterBinding, RegisterViewMo
             getString(R.string.name_is_require)
         ) { it.isNameValid() }
     }
-
-//    private fun validatePhone(): Boolean {
-//        return InputValidator.validateField(
-//            binding.edPhoneRegister,
-//            binding.phoneTilRegister,
-//            checkIcon,
-//            getString(R.string.phone_number_is_require)
-//        ) { it.isPhoneValid() }
-//    }
 
     private fun validateEmail(): Boolean {
         return InputValidator.validateField(
@@ -102,23 +129,14 @@ class RegisterFragment() : BasicFragment<FragmentRegisterBinding, RegisterViewMo
         ) { it == password }
     }
 
-    override fun afterTextChanged(s: Editable?) {}
-
-    override fun beforeTextChanged(
-        s: CharSequence?,
-        start: Int,
-        count: Int,
-        after: Int
-    ) {
+    override fun afterTextChanged(s: Editable?) {
+        vm.onNameChanged(binding.edNameRegister.text.toString())
+        vm.onPhoneChanged(binding.edPhoneRegister.text.toString())
+        vm.onEmailChanged(binding.edEmailRegister.text.toString())
+        vm.onPasswordChanged(binding.edPasswordRegister.text.toString())
+        vm.onConfirmPasswordChanged(binding.edConfirmPasswordRegister.text.toString())
     }
 
-    override fun onTextChanged(
-        s: CharSequence?,
-        start: Int,
-        before: Int,
-        count: Int
-    ) {
-    }
-
-
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 }

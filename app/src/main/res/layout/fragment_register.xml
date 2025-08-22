@@ -25,11 +25,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="40dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_logo"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/logo_comp_app" />
+                android:src="@drawable/ntg_logo_digital_transformation" />
 
             <TextView
                 android:id="@+id/appName"
