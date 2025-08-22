@@ -5,5 +5,8 @@
     <color name="gray">#ABAAAA</color>
     <color name="dark_gray">#636e72</color>
     <color name="red">#FD0000</color>
-    <color name="primary_color">#2196F3</color>
+    <color name="ivory_white">#FFFDEE</color>
+    <color name="light_cream">#FFF9DD</color>
+    <color name="peach_beige">#FFE0B2</color>
+    <color name="ochre_burnt_orange">#C77800</color>
 </resources>

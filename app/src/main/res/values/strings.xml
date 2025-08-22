@@ -2,10 +2,7 @@
     <!--    <string name="app_name">Library Management System</string>-->
     <string name="app_name">Bookly</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
+
     <string name="previous">Previous</string>
     <string name="invalid_email_address">Invalid email address</string>
     <string name="please_enter_your_email_address_you_will_receive_a_link_to_create_a_new_password_via_email">Please,enter your email address.You will receive a link to create a new password via email.</string>
@@ -13,7 +10,7 @@
     <string name="name_is_require">Name is Require</string>
     <string name="phone_number_is_require">Phone number is required</string>
     <string name="passwords_do_not_match">Password don not match</string>
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email">your@email.com</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -24,13 +21,17 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="sing_in">Sign In</string>
     <string name="don_t_have_any_account">Don\'t have any account</string>
     <string name="register">Register</string>
     <string name="or">or</string>
-    <string name="login_with_google">Login with Google</string>
-    <string name="login_with_facebook">Login With Facebook</string>
+    <string name="login_with_google">Continue with Google</string>
+    <string name="login_with_facebook">Continue With Facebook</string>
     <string name="confirmpassword">ConfirmPassword</string>
     <string name="full_name">Full Name</string>
     <string name="phone_number">Phone Number</string>
+    <string name="your_gateway_to_endless_reading">Your gateway to endless reading</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="remember_me">Remember me</string>
+    <string name="bookly">| Bookly</string>
 </resources>

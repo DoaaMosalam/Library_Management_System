@@ -5,41 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.doaa.mosalam.librarymanagementsystem.R
+import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentHomeBinding
+import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
+    override val viewModel: HomeViewModel = HomeViewModel()
 
-    private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.buttonFirst.setOnClickListener {
-
-
-            throw RuntimeException("Test Crash: This is a crash to test Firebase Crashlytics setup!")
-
-        }
-
-        return binding.root
-
-
-    }
+    override fun getLayoutResID(): Int  = R.layout.fragment_home
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }

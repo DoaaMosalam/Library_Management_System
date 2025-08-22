@@ -106,7 +106,7 @@ dependencies {
 
     // circle image view
 
-    implementation (libs.circleimageview)
+    implementation(libs.circleimageview)
 
     //countyCode
     implementation(libs.ccp)

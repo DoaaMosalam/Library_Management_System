@@ -41,10 +41,10 @@ class RegisterFragment() : BasicFragment<FragmentRegisterBinding, RegisterViewMo
 
     private fun initFocusListeners() {
         InputValidator.addFocusListener(binding.edNameRegister) { validateName() }
-        InputValidator.addFocusListener(binding.edPhoneRegister) { validatePhone() }
+//        InputValidator.addFocusListener(binding.edPhoneRegister) { validatePhone() }
         InputValidator.addFocusListener(binding.edEmailRegister) { validateEmail() }
         InputValidator.addFocusListener(binding.edPasswordRegister) { validatePassword() }
-        InputValidator.addFocusListener(binding.edConfirmPassworrdRegister) { validateConfirmPassword() }
+        InputValidator.addFocusListener(binding.edConfirmPasswordRegister) { validateConfirmPassword() }
     }
 
     private fun initTextWatcher() {
@@ -52,7 +52,7 @@ class RegisterFragment() : BasicFragment<FragmentRegisterBinding, RegisterViewMo
         binding.edPhoneRegister.addTextChangedListener(this)
         binding.edEmailRegister.addTextChangedListener(this)
         binding.edPasswordRegister.addTextChangedListener(this)
-        binding.edConfirmPassworrdRegister.addTextChangedListener(this)
+        binding.edConfirmPasswordRegister.addTextChangedListener(this)
 
     }
 
@@ -65,19 +65,19 @@ class RegisterFragment() : BasicFragment<FragmentRegisterBinding, RegisterViewMo
         ) { it.isNameValid() }
     }
 
-    private fun validatePhone(): Boolean {
-        return InputValidator.validateField(
-            binding.edPhoneRegister,
-            binding.phoneTilRegister,
-            checkIcon,
-            getString(R.string.phone_number_is_require)
-        ) { it.isPhoneValid() }
-    }
+//    private fun validatePhone(): Boolean {
+//        return InputValidator.validateField(
+//            binding.edPhoneRegister,
+//            binding.phoneTilRegister,
+//            checkIcon,
+//            getString(R.string.phone_number_is_require)
+//        ) { it.isPhoneValid() }
+//    }
 
     private fun validateEmail(): Boolean {
         return InputValidator.validateField(
             binding.edEmailRegister,
-            binding.emailTilLRegister,
+            binding.emailTilRegister,
             checkIcon,
             getString(R.string.invalid_email_address)
         ) { it.isEmailValid() }
@@ -86,7 +86,7 @@ class RegisterFragment() : BasicFragment<FragmentRegisterBinding, RegisterViewMo
     private fun validatePassword(): Boolean {
         return InputValidator.validateField(
             binding.edPasswordRegister,
-            binding.passworrdTilRegister,
+            binding.passwordTilRegister,
             checkIcon,
             getString(R.string.oops_your_password_is_not_correct)
         ) { it.isPasswordValid() }
@@ -95,8 +95,8 @@ class RegisterFragment() : BasicFragment<FragmentRegisterBinding, RegisterViewMo
     private fun validateConfirmPassword(): Boolean {
         val password = binding.edPasswordRegister.text.toString().trim()
         return InputValidator.validateField(
-            binding.edConfirmPassworrdRegister,
-            binding.confirmPassworrdTilRegister,
+            binding.edConfirmPasswordRegister,
+            binding.confirmPasswordTilRegister,
             checkIcon,
             getString(R.string.passwords_do_not_match)
         ) { it == password }
