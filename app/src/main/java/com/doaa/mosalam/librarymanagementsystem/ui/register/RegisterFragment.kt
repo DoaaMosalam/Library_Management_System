@@ -1,11 +1,13 @@
 package com.doaa.mosalam.librarymanagementsystem.ui.register
 
 
+import android.app.ProgressDialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -23,38 +25,44 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterFragment : BasicFragment<FragmentRegisterBinding, RegisterViewModel>(), TextWatcher {
+    override fun getLayoutResID(): Int = R.layout.fragment_register
 
     private val vm: RegisterViewModel by viewModels()
     override val viewModel: RegisterViewModel
         get() = vm
 
     private lateinit var checkIcon: Drawable
-
-    override fun getLayoutResID(): Int = R.layout.fragment_register
+    private lateinit var progressDialog: ProgressDialog
+    val progressBar = view?.findViewById<ProgressBar>(R.id.progressIndicator)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Initialize the ProgressDialog
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Please wait...")
+        progressDialog.setCancelable(false)
+
         checkIcon = ContextCompat.getDrawable(requireActivity(), R.drawable.baseline_check_24)!!
 
         initTextWatcher()
         initFocusListeners()
 
-        // تفعيل الزر حسب الحالة
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             vm.isRegisterEnabled.collect { binding.btnRegister.isEnabled = it }
         }
 
-        // زر التسجيل
         binding.btnRegister.setOnClickListener {
             vm.registerUser()
         }
 
-        // مراقبة الحالة
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             vm.uiState.collect { state ->
                 when (state) {
                     is RegisterViewModel.UiState.Loading -> {
-                        // show progress
+
+                        progressDialog.show()
+                      progressBar?.visibility = View.VISIBLE
+
                     }
 
                     is RegisterViewModel.UiState.Success -> {
@@ -65,10 +73,17 @@ class RegisterFragment : BasicFragment<FragmentRegisterBinding, RegisterViewMode
                         ).show()
                         view.findNavController()
                             .navigate(R.id.action_registerFragment_to_loginFragment)
+                        if (progressDialog.isShowing) {
+                            progressDialog.dismiss()
+                        }
+                        progressBar?.visibility = View.GONE
                     }
 
                     is RegisterViewModel.UiState.Error -> {
                         Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                        if (progressDialog.isShowing) {
+                            progressDialog.dismiss()
+                        }
                     }
 
                     else -> Unit

@@ -1,20 +1,30 @@
 package com.doaa.mosalam.librarymanagementsystem.ui.login.viewModel
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.doaa.mosalam.domain.model.login.Login
 import com.doaa.mosalam.domain.useCase.LoginUseCase
+import com.doaa.mosalam.librarymanagementsystem.data.repository.Resource
 import com.doaa.mosalam.librarymanagementsystem.utils.isEmailValid
 import com.doaa.mosalam.librarymanagementsystem.utils.isPasswordValid
+import com.holeCode.novamoda.data.repository.auth.FirebaseAuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    private val authRepository: FirebaseAuthRepository,
+    private val  application: Application
 ) : ViewModel() {
 
     private val _email = MutableStateFlow("")
@@ -23,6 +33,8 @@ class LoginViewModel @Inject constructor(
     private val _password = MutableStateFlow("")
     val password: StateFlow<String> = _password
 
+    private val _loginState = MutableSharedFlow<Resource<String>>()
+    val loginState: SharedFlow<Resource<String>> = _loginState.asSharedFlow()
     // ---- Sign In button state ----
     private val _isSignInEnabled = MutableStateFlow(false)
     val isSignInEnabled: StateFlow<Boolean> = _isSignInEnabled
@@ -50,8 +62,6 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun validateInputs() {
-//        _isSignInEnabled.value =
-//            _email.value.isNotEmpty() && _password.value.isNotEmpty()
         _isSignInEnabled.value =
             _email.value.isNotEmpty() &&
                     _password.value.isNotEmpty() &&
@@ -75,6 +85,30 @@ class LoginViewModel @Inject constructor(
                 _uiState.value = UiState.Error(e.message ?: "Unexpected error")
             }
         }
+    }
+
+    fun loginWithGoogle(idToken:String) = viewModelScope.launch {
+        authRepository.loginWithGoogle(idToken).onEach {resource->
+            when(resource){
+                is Resource.Success->{
+                    _loginState.emit(Resource.Success(resource.data?:"Empty User Id"))
+                }
+
+                else -> _loginState.emit(resource)
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun loginWithFacebook(token: String) =viewModelScope.launch{
+        authRepository.loginWithFacebook(token).onEach { resource ->
+            when(resource){
+                is Resource.Success->
+                    _loginState.emit(Resource.Success(resource.data?:"Empty User Id"))
+
+                else -> _loginState.emit(resource)
+            }
+        }.launchIn(viewModelScope)
+
     }
 
 

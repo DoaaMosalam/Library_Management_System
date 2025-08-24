@@ -1,5 +1,11 @@
 <resources>
     <!--    <string name="app_name">Library Management System</string>-->
+<!--    <string name="default_web_client_id">569681346766-j8cs6jngcs9kis5tuj2rln0mf384n4k2.apps.googleusercontent.com</string>-->
+
+    <string name="facebook_app_id">1133601105320249</string>
+    <string name="fb_login_protocol_scheme">fb1133601105320249</string>
+    <string name="facebook_client_token">3b9098897b7b86792bf108bc55337b78</string>
+
     <string name="app_name">Bookly</string>
     <string name="action_settings">Settings</string>
 
@@ -43,4 +49,8 @@
     <string name="browse_collection">Browse Collection</string>
     <string name="back_to_login">Back to Login</string>
     <string name="reset_password">Reset Password</string>
+    <string name="ok">Okay</string>
+    <string name="retry">Retry</string>
+    <string name="generic_error_msg">Error, Please try again later.</string>
+    <string name="google_sign_in_failed_msg">Google sign in failed, please retry again later</string>
 </resources>

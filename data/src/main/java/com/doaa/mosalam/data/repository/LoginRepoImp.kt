@@ -8,21 +8,6 @@ import com.doaa.mosalam.data.mapper.toLoginDomain
 import com.doaa.mosalam.domain.model.login.Login
 import com.doaa.mosalam.domain.repo.LoginRepo
 
-//class LoginRepoImp(private val loginDao: LoginDAO): LoginRepo {
-//    override suspend fun LoginUser(login: Login): Login? {
-//        val loginEntity = loginDao.getLogin(login.email, login.password)
-//        return loginEntity?.toDomain()
-//
-//    }
-//}
-
-//class LoginRepoImp(private val registerDAO: RegisterDAO): LoginRepo{
-//    override suspend fun LoginUser(login: Login): Login? {
-//        val registerEntity = registerDAO.getUserByEmailAndPassword(login.email, login.password)
-//        return registerEntity?.toLoginDomain()
-//    }
-//
-//}
 
 class LoginRepoImp(
     private val registerDAO: RegisterDAO,

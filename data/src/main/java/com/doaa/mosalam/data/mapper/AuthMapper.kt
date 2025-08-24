@@ -53,3 +53,4 @@ fun RegisterEntity.toLoginDomain(): Login {
 fun LoginEntity.toLoginDomain(): Login {
     return Login(email = this.email, password = this.password)
 }
+

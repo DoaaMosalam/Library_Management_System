@@ -14,6 +14,20 @@
         android:padding="16dp"
         tools:context=".ui.register.RegisterFragment">
 
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressIndicator"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:foregroundGravity="center"
+            android:visibility="gone"
+            app:indicatorColor="@color/ochre_burnt_orange"
+            app:indicatorSize="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:trackThickness="6dp" />
         <!-- Header -->
         <LinearLayout
             android:id="@+id/headerLayout"
