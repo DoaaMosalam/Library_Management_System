@@ -1,0 +1,30 @@
+package com.doaa.mosalam.librarymanagementsystem.common.di
+
+import com.doaa.mosalam.domain.repo.LoginRepo
+import com.doaa.mosalam.domain.repo.RegisterRepo
+import com.doaa.mosalam.domain.useCase.LoginUseCase
+import com.doaa.mosalam.domain.useCase.RegisterUseCase
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object UseCaseRoomDatabaseModule {
+
+    @Provides
+    @Singleton
+    fun provideLoginUseCase(loginRepo: LoginRepo):
+            LoginUseCase {
+        return LoginUseCase(loginRepo)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRegisterUseCase(registerRepo: RegisterRepo):
+            RegisterUseCase {
+        return RegisterUseCase(registerRepo)
+    }
+}
