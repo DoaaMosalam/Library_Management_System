@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.util.collectionUtils.forEachScope
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -33,10 +31,9 @@ android {
             "CLIENT_SERVER_ID",
             "\"569681346766-j8cs6jngcs9kis5tuj2rln0mf384n4k2.apps.googleusercontent.com\""
         )
-        buildConfigField ("String", "FACEBOOK_APP_ID", "\"1133601105320249\"")
-        buildConfigField("String","FB_LOGIN_PROTOCOL_SCHEME","\"fb1133601105320249\"")
-        buildConfigField ("String", "FACEBOOK_CLIENT_TOKEN", "\"3b9098897b7b86792bf108bc55337b78\"")
-
+        buildConfigField("String", "FACEBOOK_APP_ID", "\"1133601105320249\"")
+        buildConfigField("String", "FB_LOGIN_PROTOCOL_SCHEME", "\"fb1133601105320249\"")
+        buildConfigField("String", "FACEBOOK_CLIENT_TOKEN", "\"3b9098897b7b86792bf108bc55337b78\"")
 
 
     }

@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentLoginBinding
@@ -39,7 +38,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -112,7 +110,8 @@ class LoginFragment : BasicFragment<FragmentLoginBinding, LoginViewModel>(), Tex
         }
 
     }  // end of onViewCreated
-//==============================================================================================
+
+    //==============================================================================================
     private fun logAuthIssueToCrashlytics(msg: String, provider: String) {
         CrashlyticsUtils.sendCustomLogToCrashlytics<LoginException>(
             msg,
@@ -146,7 +145,7 @@ class LoginFragment : BasicFragment<FragmentLoginBinding, LoginViewModel>(), Tex
             loginWithGoogleRequest()
 
         }
-       //  Facebook login
+        //  Facebook login
         binding.btnFacebook.setOnClickListener {
             loginWithFacebook()
         }
@@ -253,7 +252,6 @@ class LoginFragment : BasicFragment<FragmentLoginBinding, LoginViewModel>(), Tex
     private fun firebaseAuthWithFacebook(token: String) {
         viewModel.loginWithFacebook(token)
     }
-
 
 
     //==============================================================================================

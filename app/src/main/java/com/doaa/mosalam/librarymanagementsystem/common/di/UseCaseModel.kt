@@ -1,8 +1,10 @@
 package com.doaa.mosalam.librarymanagementsystem.common.di
 
 import com.doaa.mosalam.domain.repo.BooksRepo
+import com.doaa.mosalam.domain.repo.CategoriesRepo
 import com.doaa.mosalam.domain.repo.SearchRepo
 import com.doaa.mosalam.domain.useCase.BooksUseCase
+import com.doaa.mosalam.domain.useCase.CategoriesUseCase
 import com.doaa.mosalam.domain.useCase.SearchUseCase
 import dagger.Module
 import dagger.Provides
@@ -21,7 +23,13 @@ object UseCaseModel {
 
     @Provides
     @Singleton
-    fun provideSearchUseCase(searchRepo: SearchRepo): SearchUseCase{
+    fun provideCategoryUseCase(categoriesRepo: CategoriesRepo): CategoriesUseCase {
+        return CategoriesUseCase(categoriesRepo)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchUseCase(searchRepo: SearchRepo): SearchUseCase {
         return SearchUseCase(searchRepo)
     }
 }

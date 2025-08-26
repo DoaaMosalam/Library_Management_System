@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -8,10 +7,11 @@
     app:cardCornerRadius="30dp"
     app:cardUseCompatPadding="false"
     app:cardElevation="0dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <!-- Poster/cover area -->
+        <!-- Poster/cover area -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgCover"
             android:layout_width="0dp"
@@ -34,12 +34,12 @@
             app:tint="@color/ochre_burnt_orange"
             app:layout_constraintTop_toTopOf="@id/imgCover"
             app:layout_constraintEnd_toEndOf="@id/imgCover"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp" />
         <!-- bottom panel (light cream) -->
         <LinearLayout
             android:id="@+id/bottomArea"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="105dp"
             android:orientation="vertical"
             android:padding="12dp"
             android:layout_margin="@dimen/_20dp"
@@ -55,7 +55,7 @@
                 android:text="BookName"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
-                android:maxLines="1"/>
+                android:maxLines="1" />
 
             <TextView
                 android:id="@+id/tvAuthor"
@@ -65,7 +65,7 @@
                 android:textSize="12sp"
                 android:textColor="@color/gray"
                 android:maxLines="1"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="2dp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnRent"
@@ -79,10 +79,10 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:background="@drawable/bg_pill_primary"/>
+                android:background="@drawable/bg_pill_primary" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
+
 </androidx.cardview.widget.CardView>
 
     

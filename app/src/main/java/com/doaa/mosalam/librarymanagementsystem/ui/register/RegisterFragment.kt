@@ -61,7 +61,7 @@ class RegisterFragment : BasicFragment<FragmentRegisterBinding, RegisterViewMode
                     is RegisterViewModel.UiState.Loading -> {
 
                         progressDialog.show()
-                      progressBar?.visibility = View.VISIBLE
+                        progressBar?.visibility = View.VISIBLE
 
                     }
 

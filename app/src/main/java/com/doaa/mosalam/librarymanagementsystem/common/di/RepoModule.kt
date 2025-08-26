@@ -2,8 +2,10 @@ package com.doaa.mosalam.librarymanagementsystem.common.di
 
 import com.doaa.mosalam.data.remote.APIService
 import com.doaa.mosalam.data.repository.BooksRepoImp
+import com.doaa.mosalam.data.repository.CategoriesRepoImp
 import com.doaa.mosalam.data.repository.SearchRepoImp
 import com.doaa.mosalam.domain.repo.BooksRepo
+import com.doaa.mosalam.domain.repo.CategoriesRepo
 import com.doaa.mosalam.domain.repo.SearchRepo
 import dagger.Module
 import dagger.Provides
@@ -19,8 +21,16 @@ object RepoModule {
     @Singleton
     fun provideBooksRepo(
         apiService: APIService
-    ): BooksRepo{
+    ): BooksRepo {
         return BooksRepoImp(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCategoryRepo(
+        apiService: APIService
+    ): CategoriesRepo {
+        return CategoriesRepoImp(apiService)
     }
 
     @Provides

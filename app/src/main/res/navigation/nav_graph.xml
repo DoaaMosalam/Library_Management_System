@@ -52,8 +52,7 @@
         android:id="@+id/detailsFragment"
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.details.DetailsFragment"
         android:label="DetailsFragment"
-        tools:layout="@layout/fragment_details">
-    </fragment>
+        tools:layout="@layout/fragment_details"></fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.forgetPasword.ForgetPasswordFragment"
