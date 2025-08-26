@@ -15,11 +15,11 @@ class LoginRepoImp(
 ) : LoginRepo {
 
     override suspend fun LoginUser(login: Login): Login? {
-        // التحقق من بيانات المستخدم في جدول register
+
         val registerEntity = registerDAO.getUserByEmailAndPassword(login.email, login.password)
 
         return if (registerEntity != null) {
-            // حفظ بيانات المستخدم في جدول login بعد النجاح
+           // save data after successful
             val loginEntity = LoginEntity(
                 email = registerEntity.email,
                 password = registerEntity.password

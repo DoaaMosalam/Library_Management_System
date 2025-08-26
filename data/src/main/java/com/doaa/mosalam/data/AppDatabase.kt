@@ -4,6 +4,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.doaa.mosalam.data.local.favoriteBooks.FavoriteBookEntity
+import com.doaa.mosalam.data.local.favoriteBooks.FavoriteDao
 import com.doaa.mosalam.data.local.login.LoginDAO
 import com.doaa.mosalam.data.local.login.LoginEntity
 import com.doaa.mosalam.data.local.register.RegisterDAO
@@ -16,8 +18,8 @@ import com.doaa.mosalam.data.local.register.RegisterEntity
 @Database(
     entities = [
         LoginEntity::class,
-        RegisterEntity::class
-
+        RegisterEntity::class,
+        FavoriteBookEntity::class
     ],
     version = 5,
     exportSchema = false
@@ -27,6 +29,7 @@ import com.doaa.mosalam.data.local.register.RegisterEntity
     abstract fun loginDao(): LoginDAO
 
     abstract fun registerDao(): RegisterDAO
+    abstract fun FavoriteDao(): FavoriteDao
 
 
     companion object {

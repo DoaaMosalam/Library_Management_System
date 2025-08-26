@@ -11,7 +11,7 @@ import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthRepositoryImpl(
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-):FirebaseAuthRepository {
+) : FirebaseAuthRepository {
     override suspend fun loginWithGoogle(idToken: String): Flow<Resource<String>> = flow {
         try {
             emit(Resource.Loading())
@@ -30,17 +30,17 @@ class FirebaseAuthRepositoryImpl(
         }
     }
 
-    override suspend fun loginWithFacebook(token: String): Flow<Resource<String>> =flow {
+    override suspend fun loginWithFacebook(token: String): Flow<Resource<String>> = flow {
         try {
             emit(Resource.Loading())
             val credential = FacebookAuthProvider.getCredential(token)
             val authResult = auth.signInWithCredential(credential).await()
-            authResult.user?.let { user->
+            authResult.user?.let { user ->
                 emit(Resource.Success(user.uid))
-            }?: run {
+            } ?: run {
                 emit(Resource.Error(Exception("User not found")))
             }
-        }catch(e:Exception) {
+        } catch (e: Exception) {
             emit(Resource.Error(e))
         }
 
@@ -53,7 +53,7 @@ class FirebaseAuthRepositoryImpl(
                 auth.sendPasswordResetEmail(email).await()
                 emit(Resource.Success("Password reset email sent "))
 
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 emit(Resource.Error(e)) //Emit error
             }
         }
@@ -63,6 +63,7 @@ class FirebaseAuthRepositoryImpl(
     override fun logout() {
         auth.signOut()
     }
+
     companion object {
         private const val TAG = "FirebaseAuthRepositoryI"
     }

@@ -1,6 +1,5 @@
 package com.doaa.mosalam.librarymanagementsystem.ui.login.viewModel
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.doaa.mosalam.domain.model.login.Login
@@ -24,7 +23,6 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val authRepository: FirebaseAuthRepository,
-    private val  application: Application
 ) : ViewModel() {
 
     private val _email = MutableStateFlow("")
@@ -35,6 +33,7 @@ class LoginViewModel @Inject constructor(
 
     private val _loginState = MutableSharedFlow<Resource<String>>()
     val loginState: SharedFlow<Resource<String>> = _loginState.asSharedFlow()
+
     // ---- Sign In button state ----
     private val _isSignInEnabled = MutableStateFlow(false)
     val isSignInEnabled: StateFlow<Boolean> = _isSignInEnabled
@@ -87,11 +86,11 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun loginWithGoogle(idToken:String) = viewModelScope.launch {
-        authRepository.loginWithGoogle(idToken).onEach {resource->
-            when(resource){
-                is Resource.Success->{
-                    _loginState.emit(Resource.Success(resource.data?:"Empty User Id"))
+    fun loginWithGoogle(idToken: String) = viewModelScope.launch {
+        authRepository.loginWithGoogle(idToken).onEach { resource ->
+            when (resource) {
+                is Resource.Success -> {
+                    _loginState.emit(Resource.Success(resource.data ?: "Empty User Id"))
                 }
 
                 else -> _loginState.emit(resource)
@@ -99,17 +98,15 @@ class LoginViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun loginWithFacebook(token: String) =viewModelScope.launch{
+    fun loginWithFacebook(token: String) = viewModelScope.launch {
         authRepository.loginWithFacebook(token).onEach { resource ->
-            when(resource){
-                is Resource.Success->
-                    _loginState.emit(Resource.Success(resource.data?:"Empty User Id"))
+            when (resource) {
+                is Resource.Success ->
+                    _loginState.emit(Resource.Success(resource.data ?: "Empty User Id"))
 
                 else -> _loginState.emit(resource)
             }
         }.launchIn(viewModelScope)
 
     }
-
-
 }
