@@ -33,11 +33,6 @@ android {
             "CLIENT_SERVER_ID",
             "\"569681346766-j8cs6jngcs9kis5tuj2rln0mf384n4k2.apps.googleusercontent.com\""
         )
-
-//        <string name="facebook_app_id">1133601105320249</string>
-//        <string name="fb_login_protocol_scheme">fb1133601105320249</string>
-//        <string name="facebook_client_token">3b9098897b7b86792bf108bc55337b78</string>
-
         buildConfigField ("String", "FACEBOOK_APP_ID", "\"1133601105320249\"")
         buildConfigField("String","FB_LOGIN_PROTOCOL_SCHEME","\"fb1133601105320249\"")
         buildConfigField ("String", "FACEBOOK_CLIENT_TOKEN", "\"3b9098897b7b86792bf108bc55337b78\"")
@@ -138,4 +133,7 @@ dependencies {
 
     //countyCode
     implementation(libs.ccp)
+
+    implementation(libs.glide)
+    implementation(libs.picasso)
 }

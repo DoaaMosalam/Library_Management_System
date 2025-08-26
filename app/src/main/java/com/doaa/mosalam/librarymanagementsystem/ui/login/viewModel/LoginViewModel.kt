@@ -24,7 +24,6 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val authRepository: FirebaseAuthRepository,
-    private val  application: Application
 ) : ViewModel() {
 
     private val _email = MutableStateFlow("")
@@ -110,6 +109,4 @@ class LoginViewModel @Inject constructor(
         }.launchIn(viewModelScope)
 
     }
-
-
 }

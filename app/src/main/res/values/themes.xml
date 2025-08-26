@@ -6,4 +6,23 @@
     </style>
 
     <style name="Theme.LibraryManagementSystem" parent="Base.Theme.LibraryManagementSystem" />
+
+
+    <style name="CategoryChip.Base" parent="Widget.Material3.Chip.Assist">
+        <item name="chipMinHeight">36dp</item>
+        <item name="chipCornerRadius">18dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="CategoryChip.Filled" parent="CategoryChip.Base">
+        <item name="chipBackgroundColor">@color/amber_200</item>
+    </style>
+
+    <style name="CategoryChip.Outlined" parent="CategoryChip.Base">
+        <item name="chipBackgroundColor">@color/cream_200</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/cream_200</item>
+    </style>
+
 </resources>

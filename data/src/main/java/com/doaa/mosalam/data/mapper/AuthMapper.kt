@@ -47,10 +47,14 @@ fun Register.toEntity(): RegisterEntity {
 }
 
 fun RegisterEntity.toLoginDomain(): Login {
-    return Login(email = this.email, password = this.password)
+    return Login(email = this.email,
+        password = this.password
+    )
 }
 
 fun LoginEntity.toLoginDomain(): Login {
-    return Login(email = this.email, password = this.password)
+    return Login(email = this.email,
+        password = this.password
+    )
 }
 
