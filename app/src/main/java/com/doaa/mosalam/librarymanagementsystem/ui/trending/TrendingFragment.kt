@@ -1,60 +1,87 @@
 package com.doaa.mosalam.librarymanagementsystem.ui.trending
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.doaa.mosalam.librarymanagementsystem.R
+import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
+import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
+import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentTrendingBinding
+import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class TrendingFragment : BasicFragment<FragmentTrendingBinding, HomeViewModel>() {
+    private val vm: HomeViewModel by viewModels()
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TrendingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class TrendingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    override val viewModel: HomeViewModel
+        get() = vm
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+    override fun getLayoutResID(): Int = R.layout.fragment_trending
+
+    private lateinit var adapter: BooksAdapter
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupAdapter()
+        setupObservers()
+
+        vm.getTrendingBooks()
+    }
+
+    private fun setupAdapter() {
+        adapter = BooksAdapter(
+            onRentClick = { book ->
+                // TODO: handle rent click
+            },
+            onFavClick = { book ->
+                vm.toggleFavorite(book)
+            },
+            onItemClick = { book ->
+//                val action = HomeFragmentDirections.actionHomeFragmentToBookDetailsFragment(book.id ?: "")
+//                findNavController().navigate(action)
+            },
+            onCheckFavorite = { bookId ->
+                vm.isBookFavorite(bookId)
+            }
+        )
+//        binding.rvTrendingBooksPage.layoutManager =
+//            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvTrendingBooksPage.adapter = adapter
+    }
+
+    private fun setupObservers() {
+        lifecycleScope.launch {
+            vm.books.collectLatest { list ->
+                adapter.setData(list ?: emptyList())
+            }
+        }
+
+        lifecycleScope.launch {
+            vm.loading.collectLatest { loading ->
+                binding.progressIndicator.visibility = if (loading) View.VISIBLE else View.GONE
+            }
+        }
+
+        lifecycleScope.launch {
+            vm.error.collectLatest { message ->
+                message?.let {
+
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.favoriteBooks.collect { favorites ->
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trending, container, false)
-    }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TrendingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TrendingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

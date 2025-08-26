@@ -2,20 +2,23 @@ package com.doaa.mosalam.librarymanagementsystem.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.doaa.mosalam.domain.model.trendingBooks.Volume
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
+import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
 import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentHomeBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlin.getValue
+
 @AndroidEntryPoint
 class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
     private val vm: HomeViewModel by viewModels()
@@ -26,7 +29,8 @@ class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun getLayoutResID(): Int = R.layout.fragment_home
 
-    private lateinit var adapter: BooksAdapter
+    private lateinit var booksadapter: BooksAdapter
+    private lateinit var categoriesAdapter: CategoriesAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,36 +42,54 @@ class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
         binding.viewAllCategories.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
         }
-
+// set adapters for  Trending Books
         setupAdapter()
+        // set adapter for categories
+        setupCategoryAdapter()
+
         setupObservers()
         setupClickListeners()
-
         vm.getTrendingBooks()
     }
+
     private fun setupAdapter() {
-        adapter = BooksAdapter(
+        booksadapter = BooksAdapter(
             onRentClick = { book ->
                 // TODO: handle rent click
             },
             onFavClick = { book ->
-                // TODO: handle favorite click
+                vm.toggleFavorite(book)
             },
             onItemClick = { book ->
-                // مثال: الانتقال لصفحة تفاصيل الكتاب
 //                val action = HomeFragmentDirections.actionHomeFragmentToBookDetailsFragment(book.id ?: "")
 //                findNavController().navigate(action)
+            },
+            onCheckFavorite = { bookId ->
+                vm.isBookFavorite(bookId)
             }
         )
         binding.rvTrendingBooks.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvTrendingBooks.adapter = adapter
+        binding.rvTrendingBooks.adapter = booksadapter
+    }
+
+    // set adapter for categories
+    private fun setupCategoryAdapter() {
+        categoriesAdapter = CategoriesAdapter(emptyList()) { category ->
+            vm.getBooksByCategory(category)
+        }
+        binding.rvCategories.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.rvCategories.adapter = categoriesAdapter
+        binding.rvCategories.setHasFixedSize(true)
+
+
     }
 
     private fun setupObservers() {
         lifecycleScope.launch {
             vm.books.collectLatest { list ->
-                adapter.setData(list ?: emptyList())
+                booksadapter.setData(list ?: emptyList())
             }
         }
 
@@ -80,9 +102,31 @@ class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
         lifecycleScope.launch {
             vm.error.collectLatest { message ->
                 message?.let {
-                    // عرض رسالة خطأ
-                    // Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                 }
+            }
+        }
+        lifecycleScope.launch {
+            vm.categories.collectLatest { list ->
+                categoriesAdapter = CategoriesAdapter(list) { category ->
+                    vm.getBooksByCategory(category)
+                }
+                binding.rvCategories.adapter = categoriesAdapter
+
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.booksByCategory.collect { books ->
+
+                    booksadapter.setData(books)
+                    binding.rvCategoriesBooks.adapter = booksadapter
+                }
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.favoriteBooks.collect { favorites ->
+                booksadapter.notifyDataSetChanged()
             }
         }
     }
