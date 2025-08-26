@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
+import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
 import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentTrendingBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
@@ -25,6 +26,7 @@ class TrendingFragment : BasicFragment<FragmentTrendingBinding, HomeViewModel>()
     override fun getLayoutResID(): Int = R.layout.fragment_trending
 
     private lateinit var adapter: BooksAdapter
+    private lateinit var categoriesAdapter: CategoriesAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,7 +73,6 @@ class TrendingFragment : BasicFragment<FragmentTrendingBinding, HomeViewModel>()
         lifecycleScope.launch {
             vm.error.collectLatest { message ->
                 message?.let {
-
                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                 }
             }

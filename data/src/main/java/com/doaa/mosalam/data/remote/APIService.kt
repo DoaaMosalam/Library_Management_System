@@ -18,7 +18,7 @@ interface APIService {
     @GET("volumes")
     suspend fun getTrendingBooks(
         @Query("q") query: String = "bestsellers",
-        @Query("maxResults") maxResults: Int = 40
+        @Query("maxResults") maxResults: Int = 20
     ): BooksResponse
 
 //    @GET("trending-books/most-loaned")
