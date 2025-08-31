@@ -59,4 +59,7 @@
     <string name="rent_for_4_99">Rent for $4.99</string>
     <string name="browse_our_entire_collection_of_trending_books">Browse our entire collection of trending books</string>
     <string name="similar_books_you_might_like">Similar Books You Might Like</string>
+    <string name="profile">Profile</string>
+    <string name="payments">Payments</string>
+    <string name="logout">Logout</string>
 </resources>

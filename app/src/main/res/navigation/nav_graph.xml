@@ -36,23 +36,25 @@
         tools:layout="@layout/fragment_home">
 
         <action
-            android:id="@+id/action_homeFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_detailsFragment2"
-            app:destination="@id/detailsFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_trendingFragment"
             app:destination="@id/trendingFragment" />
         <action
             android:id="@+id/action_homeFragment_to_categoryFragment"
             app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.details.DetailsFragment"
         android:label="DetailsFragment"
-        tools:layout="@layout/fragment_details"></fragment>
+        tools:layout="@layout/fragment_details">
+
+    </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.forgetPasword.ForgetPasswordFragment"
@@ -65,10 +67,23 @@
         android:id="@+id/trendingFragment"
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.trending.TrendingFragment"
         android:label="fragment_trending"
-        tools:layout="@layout/fragment_trending" />
+        tools:layout="@layout/fragment_trending" >
+        <action
+            android:id="@+id/action_trendingFragment_to_detailsFragment2"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.category.CategoryFragment"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_category" />
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_detailsFragment2"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.doaa.mosalam.librarymanagementsystem.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

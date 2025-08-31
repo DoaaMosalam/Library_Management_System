@@ -11,37 +11,38 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
 import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
-import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentCategoryBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
+import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CategoryFragment : BasicFragment<FragmentCategoryBinding, HomeViewModel>() {
+class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewModel>() {
+    override fun getLayoutResID(): Int = R.layout.fragment_category
     private val vm: HomeViewModel by viewModels()
 
     override val viewModel: HomeViewModel
         get() = vm
 
-
-    override fun getLayoutResID(): Int = R.layout.fragment_category
-    private lateinit var booksadapter: BooksAdapter
+    private lateinit var booksAdapter: BooksAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // setUp user menu for username TextView
+        setupUserMenu(binding.commonHeader.userName)
         setupAdapter()
         // set adapter for categories
         setupCategoryAdapter()
 
         setupObservers()
-
     }
 
     private fun setupAdapter() {
-        booksadapter = BooksAdapter(
+        booksAdapter = BooksAdapter(
             onRentClick = { book ->
                 // TODO: handle rent click
             },
@@ -58,7 +59,7 @@ class CategoryFragment : BasicFragment<FragmentCategoryBinding, HomeViewModel>()
         )
         binding.rvCategoriesPage.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvCategoriesPage.adapter = booksadapter
+        binding.rvCategoriesPage.adapter = booksAdapter
     }
 
     // set adapter for categories
@@ -77,7 +78,7 @@ class CategoryFragment : BasicFragment<FragmentCategoryBinding, HomeViewModel>()
     private fun setupObservers() {
         lifecycleScope.launch {
             vm.books.collectLatest { list ->
-                booksadapter.setData(list ?: emptyList())
+                booksAdapter.setData(list ?: emptyList())
             }
         }
 
@@ -107,14 +108,14 @@ class CategoryFragment : BasicFragment<FragmentCategoryBinding, HomeViewModel>()
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.booksByCategory.collect { books ->
 
-                    booksadapter.setData(books)
-                    binding.rvCategoriesBooksPage.adapter = booksadapter
+                    booksAdapter.setData(books)
+                    binding.rvCategoriesBooksPage.adapter = booksAdapter
                 }
             }
         }
         lifecycleScope.launch {
             viewModel.favoriteBooks.collect { favorites ->
-                booksadapter.notifyDataSetChanged()
+                booksAdapter.notifyDataSetChanged()
             }
         }
     }

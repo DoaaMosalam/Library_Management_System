@@ -11,12 +11,13 @@ import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
 import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentTrendingBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
+import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class TrendingFragment : BasicFragment<FragmentTrendingBinding, HomeViewModel>() {
+class TrendingFragment : BaseUserNameFragment<FragmentTrendingBinding, HomeViewModel>() {
     private val vm: HomeViewModel by viewModels()
 
     override val viewModel: HomeViewModel
@@ -24,18 +25,20 @@ class TrendingFragment : BasicFragment<FragmentTrendingBinding, HomeViewModel>()
 
 
     override fun getLayoutResID(): Int = R.layout.fragment_trending
-
     private lateinit var adapter: BooksAdapter
-    private lateinit var categoriesAdapter: CategoriesAdapter
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // setUp user menu for username TextView
+        setupUserMenu(binding.commonHeader.userName)
+
         setupAdapter()
         setupObservers()
 
         vm.getTrendingBooks()
-    }
 
+    }
     private fun setupAdapter() {
         adapter = BooksAdapter(
             onRentClick = { book ->
