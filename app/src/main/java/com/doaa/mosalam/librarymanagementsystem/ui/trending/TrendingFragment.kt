@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
 import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
@@ -85,6 +86,14 @@ class TrendingFragment : BaseUserNameFragment<FragmentTrendingBinding, HomeViewM
                 adapter.notifyDataSetChanged()
             }
         }
+    }
+
+    override fun navigateToProfile() {
+        findNavController().navigate(R.id.action_trendingFragment_to_profileFragment)
+    }
+
+    override fun navigateToPayments() {
+        TODO("Not yet implemented")
     }
 
 
