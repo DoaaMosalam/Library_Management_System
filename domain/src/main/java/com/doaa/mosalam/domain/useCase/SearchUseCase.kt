@@ -1,12 +1,16 @@
 package com.doaa.mosalam.domain.useCase
 
 import com.doaa.mosalam.domain.model.trendingBooks.BooksResponse
+
 import com.doaa.mosalam.domain.repo.SearchRepo
-import kotlinx.coroutines.flow.Flow
 
-class SearchUseCase(private val searchRepo: SearchRepo) {
+import javax.inject.Inject
 
-    suspend fun searchBooks(query:String) : BooksResponse = searchRepo.searchBooks(
-        query
-    )
+class SearchUseCase @Inject constructor(
+    private val searchRepo: SearchRepo
+) {
+
+    suspend fun searchBooks(query:String) : BooksResponse {
+        return searchRepo.searchBooks(query)
+    }
 }

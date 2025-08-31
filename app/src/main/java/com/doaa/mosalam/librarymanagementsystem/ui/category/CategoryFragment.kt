@@ -1,11 +1,8 @@
 package com.doaa.mosalam.librarymanagementsystem.ui.category
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,12 +13,10 @@ import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
 import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
 import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentCategoryBinding
-import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentTrendingBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlin.getValue
 
 @AndroidEntryPoint
 class CategoryFragment : BasicFragment<FragmentCategoryBinding, HomeViewModel>() {
@@ -43,7 +38,8 @@ class CategoryFragment : BasicFragment<FragmentCategoryBinding, HomeViewModel>()
 
         setupObservers()
 
-        }
+    }
+
     private fun setupAdapter() {
         booksadapter = BooksAdapter(
             onRentClick = { book ->

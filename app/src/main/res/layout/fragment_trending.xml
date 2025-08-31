@@ -66,6 +66,7 @@
                         android:text="@string/browse_our_entire_collection_of_trending_books"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvTrendingCategoriesPage"
                         android:layout_width="match_parent"

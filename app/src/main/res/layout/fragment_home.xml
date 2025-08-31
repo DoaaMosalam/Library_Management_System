@@ -35,7 +35,7 @@
                     android:layout_gravity="center"
                     android:visibility="gone"
                     app:indicatorSize="48dp"
-                    app:indicatorColor="@color/ochre_burnt_orange"
+                    app:indicatorColor="@color/blue"
                     app:trackThickness="6dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -213,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="3" />
+                    app:spanCount="2" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
