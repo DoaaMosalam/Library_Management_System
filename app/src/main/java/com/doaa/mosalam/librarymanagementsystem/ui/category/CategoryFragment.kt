@@ -33,6 +33,7 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         // setUp user menu for username TextView
         setupUserMenu(binding.commonHeader.userName)
         setupAdapter()
