@@ -142,6 +142,7 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
         booksAdapter = BooksAdapter(
             onRentClick = { book ->
                 // TODO: handle rent click
+
             },
             onFavClick = { book ->
                 vm.toggleFavorite(book)
@@ -149,6 +150,7 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
             onItemClick = { book ->
 //                val action = HomeFragmentDirections.actionHomeFragmentToBookDetailsFragment(book.id ?: "")
 //                findNavController().navigate(action)
+               findNavController().navigate(R.id.action_homeFragment_to_detailsFragment)
             },
             onCheckFavorite = { bookId ->
                 vm.isBookFavorite(bookId)
@@ -185,6 +187,14 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
         }
         binding.viewAllTrending.setOnClickListener(commonClick)
         binding.viewAllCategories.setOnClickListener(commonClick)
+    }
+
+    override fun navigateToProfile() {
+        findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+    }
+
+    override fun navigateToPayments() {
+        TODO("Not yet implemented")
     }
 
 }

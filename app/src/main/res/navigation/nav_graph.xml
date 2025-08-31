@@ -54,6 +54,9 @@
         android:label="DetailsFragment"
         tools:layout="@layout/fragment_details">
 
+        <action
+            android:id="@+id/action_detailsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
@@ -71,6 +74,9 @@
         <action
             android:id="@+id/action_trendingFragment_to_detailsFragment2"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_trendingFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -78,8 +84,11 @@
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" >
         <action
-            android:id="@+id/action_categoryFragment_to_detailsFragment2"
+            android:id="@+id/action_categoryFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

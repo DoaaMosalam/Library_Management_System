@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
@@ -118,6 +119,14 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
                 booksAdapter.notifyDataSetChanged()
             }
         }
+    }
+
+    override fun navigateToProfile() {
+        findNavController().navigate(R.id.action_categoryFragment_to_profileFragment)
+    }
+
+    override fun navigateToPayments() {
+        TODO("Not yet implemented")
     }
 
 

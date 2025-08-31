@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 fun EditText.debounceSearch(
     lifecycleOwner: LifecycleOwner,
     delayMillis: Long = 300,

@@ -37,12 +37,7 @@ abstract class BaseUserNameFragment<VB : ViewDataBinding, VM : ViewModel>
     }
 
     // can be abstract if each Fragment has different navigation
-    protected open fun navigateToProfile() {
-        // Default implementation (can be overridden)
-        findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
-    }
-    protected open fun navigateToPayments() {
-
-    }
+    abstract  fun navigateToProfile()
+    abstract fun navigateToPayments()
     protected open fun handleLogout() {}
 }
