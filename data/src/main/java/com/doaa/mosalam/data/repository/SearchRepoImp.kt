@@ -8,9 +8,9 @@ import javax.inject.Inject
 
 class SearchRepoImp @Inject constructor(
     private val apiService: APIService
-): SearchRepo {
-    override suspend fun searchBooks(query: String): BooksResponse {
-        TODO("Not yet implemented")
-    }
+) : SearchRepo {
 
+    override suspend fun searchBooks(query: String): BooksResponse {
+        return apiService.searchBooks(query)
+    }
 }

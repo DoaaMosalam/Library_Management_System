@@ -36,14 +36,11 @@ interface APIService {
     ): BooksResponse
 
 
-
-
-
     // Search Books by query
     @GET("volumes")
     suspend fun searchBooks(
         @Query("q") query: String,
-        @Query("maxResults") maxResults: Int = 40
+//        @Query("maxResults") maxResults: Int = 40
     ): BooksResponse
 
     // Get Book Details by ID

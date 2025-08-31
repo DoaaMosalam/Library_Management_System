@@ -103,8 +103,6 @@ class LoginFragment : BasicFragment<FragmentLoginBinding, LoginViewModel>(), Tex
             }
         }
 
-
-        // زر تسجيل الدخول العادي (Email + Password)
         binding.btnLogin.setOnClickListener {
             vm.loginUser()
         }

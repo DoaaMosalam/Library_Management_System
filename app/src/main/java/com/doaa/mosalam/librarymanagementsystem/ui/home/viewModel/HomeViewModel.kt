@@ -40,20 +40,6 @@ class HomeViewModel @Inject constructor(
         getTrendingBooks()
     }
 
-    //    fun getTrendingBooks() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            _isLoading.value = true
-//            try {
-//                val response = booksUseCase.getTrendingBooks()
-//                Log.d("HomeViewModel", "Books count: ${response.items?.size}")
-//                _books.value = (response.items ?: emptyList()) as List<Volume>?
-//            } catch (e: Exception) {
-//                _error.value = e.message
-//            } finally {
-//                _isLoading.value = false
-//            }
-//        }
-//    }
     fun getTrendingBooks() {
         viewModelScope.launch(Dispatchers.IO) {
             _isLoading.value = true
@@ -94,7 +80,7 @@ class HomeViewModel @Inject constructor(
     fun toggleFavorite(book: Volume) {
         val currentFavorites = _favoriteBooks.value.toMutableList()
         if (currentFavorites.any { it.id == book.id }) {
-            // إزالة من المفضلة
+            // remove from favorites
             currentFavorites.removeAll { it.id == book.id }
         } else {
             currentFavorites.add(book)
