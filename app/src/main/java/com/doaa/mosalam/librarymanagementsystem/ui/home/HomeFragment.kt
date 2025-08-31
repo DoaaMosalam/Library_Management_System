@@ -1,6 +1,7 @@
 package com.doaa.mosalam.librarymanagementsystem.ui.home
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -10,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
@@ -19,28 +21,29 @@ import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentHomeBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
 import com.doaa.mosalam.librarymanagementsystem.ui.search.SearchViewModel
 import com.doaa.mosalam.librarymanagementsystem.ui.search.debounceSearch
+import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.utils.CommonClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
+class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() {
+    override fun getLayoutResID(): Int = R.layout.fragment_home
     private val vm: HomeViewModel by viewModels()
 
     override val viewModel: HomeViewModel
         get() = vm
 
-
-    override fun getLayoutResID(): Int = R.layout.fragment_home
     private val searchViewModel: SearchViewModel by viewModels()
-    private lateinit var booksadapter: BooksAdapter
+
+    private lateinit var booksAdapter: BooksAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // setUp user menu for username TextView
+        setupUserMenu(binding.commonHeader.userName)
 // set adapters for  Trending Books
         setupAdapter()
         // set adapter for categories
@@ -52,13 +55,14 @@ class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
 
         val searchEdit = binding.commonHeader.searchInput
         setupSearchEdit(searchEdit)
+
     }
 
     // Observers to handle data changes and update UI
     private fun setupObservers() {
         lifecycleScope.launch {
             vm.books.collectLatest { list ->
-                booksadapter.setData(list ?: emptyList())
+                booksAdapter.setData(list ?: emptyList())
             }
         }
 
@@ -90,15 +94,15 @@ class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.booksByCategory.collect { books ->
 
-                    booksadapter.setData(books)
-                    binding.rvCategoriesBooks.adapter = booksadapter
+                    booksAdapter.setData(books)
+                    binding.rvCategoriesBooks.adapter = booksAdapter
                 }
             }
         }
 
         lifecycleScope.launch {
             viewModel.favoriteBooks.collect { favorites ->
-                booksadapter.notifyDataSetChanged()
+                booksAdapter.notifyDataSetChanged()
             }
         }
 
@@ -106,26 +110,22 @@ class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
             searchViewModel.searchResults.collectLatest { list ->
                 if (list.isNotEmpty()) {
                     // show search results
-                    booksadapter.setData(list)
-                    binding.rvTrendingBooks.adapter = booksadapter
+                    booksAdapter.setData(list)
+                    binding.rvTrendingBooks.adapter = booksAdapter
                 } else {
                     // show trending books if search results are empty
                     vm.books.collectLatest { trending ->
-                        booksadapter.setData(trending ?: emptyList())
-                        binding.rvTrendingBooks.adapter = booksadapter
+                        booksAdapter.setData(trending ?: emptyList())
+                        binding.rvTrendingBooks.adapter = booksAdapter
                     }
                 }
             }
         }
     }
 
-    // setup search with debounce
-//    editText.debounceSearch(viewLifecycleOwner) { query ->
-//        myViewModel.searchBooks(query)
-//    }
     private fun setupSearchEdit(editText: EditText) {
 
-        val searchEdit: EditText = binding.commonHeader.searchInput
+        val searchEdit = binding.commonHeader.searchInput
 
         searchEdit.debounceSearch(viewLifecycleOwner) { query ->
             if (query.isEmpty()) {
@@ -139,7 +139,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
 // set adapters for  Trending Books
 
     private fun setupAdapter() {
-        booksadapter = BooksAdapter(
+        booksAdapter = BooksAdapter(
             onRentClick = { book ->
                 // TODO: handle rent click
             },
@@ -156,7 +156,7 @@ class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
         )
         binding.rvTrendingBooks.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvTrendingBooks.adapter = booksadapter
+        binding.rvTrendingBooks.adapter = booksAdapter
     }
 
     // set adapter for categories
@@ -186,4 +186,5 @@ class HomeFragment : BasicFragment<FragmentHomeBinding, HomeViewModel>() {
         binding.viewAllTrending.setOnClickListener(commonClick)
         binding.viewAllCategories.setOnClickListener(commonClick)
     }
+
 }
