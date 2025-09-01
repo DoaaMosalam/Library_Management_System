@@ -34,7 +34,8 @@ class ProfileFragment : BaseUserNameFragment<FragmentProfileBinding, ProfileView
     }
 
     override fun navigateToProfile() {
-        TODO("Not yet implemented")
+        return // already in profile
+
     }
 
     override fun navigateToPayments() {

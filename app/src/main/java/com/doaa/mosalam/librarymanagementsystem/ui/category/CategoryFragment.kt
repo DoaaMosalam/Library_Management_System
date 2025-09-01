@@ -33,7 +33,6 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         // setUp user menu for username TextView
         setupUserMenu(binding.commonHeader.userName)
         setupAdapter()
@@ -43,6 +42,13 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
         setupObservers()
     }
 
+    override fun navigateToProfile() {
+        findNavController().navigate(R.id.action_categoryFragment_to_profileFragment)
+    }
+
+    override fun navigateToPayments() {
+        TODO("Not yet implemented")
+    }
     private fun setupAdapter() {
         booksAdapter = BooksAdapter(
             onRentClick = { book ->
@@ -122,13 +128,7 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
         }
     }
 
-    override fun navigateToProfile() {
-        findNavController().navigate(R.id.action_categoryFragment_to_profileFragment)
-    }
 
-    override fun navigateToPayments() {
-        TODO("Not yet implemented")
-    }
 
 
 }

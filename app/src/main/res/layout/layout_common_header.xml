@@ -109,14 +109,16 @@
                     android:textStyle="bold"
                     android:layout_marginEnd="12dp" />
 
-                <ImageButton
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_myShelf"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/ic_favorite_border"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:layout_marginEnd="8dp" />
 
-                <ImageButton
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_notifications"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/baseline_notifications_none_24"

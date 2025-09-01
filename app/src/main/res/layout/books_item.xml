@@ -15,7 +15,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgCover"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="@dimen/_250dp"
             android:background="@drawable/bg_placeholder"
             android:scaleType="centerCrop"
             android:layout_margin="@dimen/_20dp"

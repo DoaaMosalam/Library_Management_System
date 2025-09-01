@@ -62,4 +62,15 @@
     <string name="profile">Profile</string>
     <string name="payments">Payments</string>
     <string name="logout">Logout</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="account_actions">Account Actions</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="cancel">Cancel</string>
+    <string name="re_enter_new_password">Re-Enter New Password</string>
+    <string name="enter_new_password">Enter New Password</string>
+    <string name="enter_old_password">Enter Old Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="account_information">Account Information</string>
+    <string name="manage_your_reading_journey">Manage your reading journey</string>
+    <string name="reading">Reading</string>
 </resources>
