@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
 import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
-import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentHomeBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
 import com.doaa.mosalam.librarymanagementsystem.ui.search.SearchViewModel
@@ -34,6 +33,14 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
 
     override val viewModel: HomeViewModel
         get() = vm
+
+    override fun navigateToProfile() {
+        findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
+    }
+
+    override fun navigateToPayments() {
+        TODO("Not yet implemented")
+    }
 
     private val searchViewModel: SearchViewModel by viewModels()
 
@@ -183,18 +190,16 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
 
                 R.id.viewAllCategories -> v.findNavController()
                     .navigate(R.id.action_homeFragment_to_categoryFragment)
+                R.id.btn_myShelf -> v.findNavController()
+                    .navigate(R.id.action_homeFragment_to_mySelfFragment)
+
             }
         }
         binding.viewAllTrending.setOnClickListener(commonClick)
         binding.viewAllCategories.setOnClickListener(commonClick)
+        binding.commonHeader.btnMyShelf.setOnClickListener(commonClick)
     }
 
-    override fun navigateToProfile() {
-        findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
-    }
 
-    override fun navigateToPayments() {
-        TODO("Not yet implemented")
-    }
 
 }

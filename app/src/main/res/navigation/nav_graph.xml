@@ -47,6 +47,12 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mySelfFragment"
+            app:destination="@id/mySelfFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mySelfFragment2"
+            app:destination="@id/mySelfFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -95,4 +101,13 @@
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/mySelfFragment"
+        android:name="com.doaa.mosalam.librarymanagementsystem.ui.mySelf.MySelfFragment"
+        android:label="fragment_my_self"
+        tools:layout="@layout/fragment_my_self" >
+        <action
+            android:id="@+id/action_mySelfFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>
