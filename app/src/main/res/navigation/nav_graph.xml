@@ -83,6 +83,9 @@
         <action
             android:id="@+id/action_trendingFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_trendingFragment_to_mySelfFragment"
+            app:destination="@id/mySelfFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -95,6 +98,9 @@
         <action
             android:id="@+id/action_categoryFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_mySelfFragment"
+            app:destination="@id/mySelfFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

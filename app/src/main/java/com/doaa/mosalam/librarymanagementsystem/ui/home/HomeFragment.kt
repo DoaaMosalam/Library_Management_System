@@ -161,7 +161,8 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
             },
             onCheckFavorite = { bookId ->
                 vm.isBookFavorite(bookId)
-            }
+            },
+            lifecycleOwner = viewLifecycleOwner
         )
         binding.rvTrendingBooks.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -193,11 +194,12 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
                 R.id.btn_myShelf -> v.findNavController()
                     .navigate(R.id.action_homeFragment_to_mySelfFragment)
 
+
             }
         }
         binding.viewAllTrending.setOnClickListener(commonClick)
         binding.viewAllCategories.setOnClickListener(commonClick)
-        binding.commonHeader.btnMyShelf.setOnClickListener(commonClick)
+        binding.commonHeader.btnMyShelf.setOnClickListener (commonClick)
     }
 
 

@@ -1,8 +1,8 @@
 package com.doaa.mosalam.data.repository
 
 import com.doaa.mosalam.data.local.favoriteBooks.FavoriteDao
-import com.doaa.mosalam.data.mapper.mapToFavoriteDB
 import com.doaa.mosalam.data.mapper.toDomain
+import com.doaa.mosalam.data.mapper.toEntity
 
 import com.doaa.mosalam.domain.model.favorite.FavoriteBooks
 import com.doaa.mosalam.domain.repo.FavoriteRepo
@@ -13,22 +13,29 @@ import javax.inject.Inject
 class FavoriteRepoImp @Inject constructor(
     private val favoriteDao: FavoriteDao
 ) : FavoriteRepo{
-    override suspend fun addToFavorites(book: FavoriteBooks) {
-        favoriteDao.insertFavorite(book.mapToFavoriteDB())
+    override suspend fun addBooksToFavorites(book: FavoriteBooks) {
+        favoriteDao.addBooksToFavorites(book.toEntity())
     }
 
     override suspend fun removeFromFavorites(bookId: String) {
-        favoriteDao.removeFavorite(bookId)
+        favoriteDao.removeFromFavorites(bookId)
     }
 
-    override fun getFavorites(): Flow<List<FavoriteBooks>> {
-        return favoriteDao.getAllFavorites().map { favoriteEntities ->
-            favoriteEntities.map { it.toDomain() }
+    override fun getBooksFromFavorites(): Flow<List<FavoriteBooks>> {
+        return favoriteDao.getBooksFromFavorites().map { list ->
+            list.map { it.toDomain() }
+        }
+
+    }
+
+
+    override fun isFavorite(bookId: String): Flow<Boolean> {
+        return favoriteDao.getBooksFromFavorites().map { list ->
+            list.any { it.id == bookId }
         }
     }
 
-    override fun isFavorite(bookId: String): Flow<Boolean> {
-        return favoriteDao.isFavorite(bookId)
-    }
+    override suspend fun updateReadingStatus(bookId: String, status: String) = favoriteDao.updateReadingStatus(bookId, status)
+
 
 }

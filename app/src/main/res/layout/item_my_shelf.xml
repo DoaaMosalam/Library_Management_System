@@ -2,56 +2,74 @@
 <androidx.cardview.widget.CardView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_250dp"
-    android:layout_height="@dimen/_250dp"
-    android:layout_marginEnd="12dp"
-    app:cardCornerRadius="30dp"
-    app:cardUseCompatPadding="false"
-    app:cardElevation="0dp">
+    android:layout_width="@dimen/_160dp"
+    android:layout_height="@dimen/_240dp"
+    android:layout_margin="@dimen/_8dp"
+    app:cardCornerRadius="@dimen/_16dp"
+    app:cardElevation="@dimen/_4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!-- Poster/cover area -->
+
+        <!-- Cover Image -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgCover"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_250dp"
-            android:background="@drawable/bg_placeholder"
+            android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:layout_margin="@dimen/_20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_placeholder"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottomArea"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <!-- bottom panel (light cream) -->
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Bottom Bar -->
         <LinearLayout
             android:id="@+id/bottomArea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20dp"
-            android:layout_marginEnd="@dimen/_20dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:background="@color/light_cream"
-            android:orientation="vertical"
-            android:padding="12dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imgCover"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_8dp"
+            android:paddingEnd="@dimen/_8dp"
+            android:paddingTop="@dimen/_4dp"
+            android:paddingBottom="@dimen/_4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
+            <!-- Status -->
             <TextView
                 android:id="@+id/tvBookStatus"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:maxLines="1"
-                android:text="@string/reading"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Reading"
                 android:textColor="@color/ochre_burnt_orange"
-                android:textSize="14sp" />
+                android:textSize="12sp"
+                android:gravity="center"/>
 
+            <!-- Action Button -->
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:id="@+id/btnRemoveFav"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:minHeight="28dp"-->
+<!--                android:paddingLeft="12dp"-->
+<!--                android:paddingRight="12dp"-->
+<!--                android:text="Remove"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                android:background="@drawable/bg_pill_primary"-->
+<!--                android:visibility="visible"/>-->
 
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
-
-

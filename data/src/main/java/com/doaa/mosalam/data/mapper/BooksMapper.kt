@@ -5,19 +5,20 @@ import com.doaa.mosalam.domain.model.favorite.FavoriteBooks
 
 
 // Mapping Function
-fun FavoriteBooks.mapToFavoriteDB(): FavoriteBookEntity {
+fun FavoriteBooks.toEntity(): FavoriteBookEntity {
     return FavoriteBookEntity(
-        id = id!!,
+        id = id ?: "",
         title = title,
-        authors = authors?.joinToString(","),
+        authors = authors,
         description = description,
         pageCount = pageCount,
-        categories = categories?.joinToString(","),
+        categories = categories,
         thumbnail = thumbnail,
-        publisher = null,
-        publishedDate = null,
-        averageRating = null,
-        ratingsCount = null
+        publisher = publisher,
+        publishedDate = publishedDate,
+        averageRating = averageRating,
+        ratingsCount = ratingsCount,
+        readingStatus = readingStatus
     )
 }
 
@@ -25,10 +26,16 @@ fun FavoriteBookEntity.toDomain(): FavoriteBooks {
     return FavoriteBooks(
         id = id,
         title = title,
-        authors = authors?.split(","),
+        authors = authors,
         description = description,
         pageCount = pageCount,
-        categories = categories?.split(","),
-        thumbnail = thumbnail
+        categories = categories,
+        thumbnail = thumbnail,
+        publisher = publisher,
+        publishedDate = publishedDate,
+        averageRating = averageRating,
+        ratingsCount = ratingsCount,
+        readingStatus = readingStatus
     )
 }
+

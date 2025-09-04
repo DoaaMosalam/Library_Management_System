@@ -3,11 +3,14 @@ package com.doaa.mosalam.librarymanagementsystem.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.doaa.mosalam.domain.model.trendingBooks.Volume
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.databinding.BooksItemBinding
+import com.doaa.mosalam.librarymanagementsystem.utils.collectIn
+import kotlinx.coroutines.flow.Flow
 
 
 class BooksAdapter(
@@ -15,7 +18,8 @@ class BooksAdapter(
     private val onRentClick: (Volume) -> Unit,
     private val onFavClick: (Volume) -> Unit,
     private val onItemClick: (Volume) -> Unit,
-    private val onCheckFavorite: (String) -> Boolean
+    private val onCheckFavorite: (String) -> Flow<Boolean>,
+    private val lifecycleOwner: LifecycleOwner
 ) : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
 
     inner class BooksViewHolder(private val binding: BooksItemBinding) :
@@ -40,12 +44,14 @@ class BooksAdapter(
                     "Not for Sale"
                 }
 // change favorite icon based on isFavorite
-                val isFavorite = onCheckFavorite(book.id ?: "")
-                if (isFavorite) {
-                    btnFav.setImageResource(R.drawable.ic_favorite)
-                } else {
-                    btnFav.setImageResource(R.drawable.ic_favorite_border)
+                onCheckFavorite(book.id!!).collectIn(lifecycleOwner) { isFav ->
+                    if (isFav) {
+                        btnFav.setImageResource(R.drawable.ic_favorite)
+                    } else {
+                        btnFav.setImageResource(R.drawable.ic_favorite_border)
+                    }
                 }
+
                 // Click Listeners
                 btnRent.setOnClickListener { onRentClick(book) }
                 btnFav.setOnClickListener { onFavClick(book) }

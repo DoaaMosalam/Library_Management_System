@@ -23,12 +23,13 @@ object NetworkRoomDataModule {
             Constant.DATABASE_NAME
 
 
-        ).addMigrations(
-            AppDatabase.MIGRATION_1_2,
-            AppDatabase.MIGRATION_2_3,
-            AppDatabase.MIGRATION_3_4,
-            AppDatabase.MIGRATION_4_5
         )
+//            .addMigrations(
+//            AppDatabase.MIGRATION_1_2,
+//            AppDatabase.MIGRATION_2_3,
+//            AppDatabase.MIGRATION_3_4,
+//            AppDatabase.MIGRATION_4_5
+//        )
             .fallbackToDestructiveMigration() // This will destroy and recreate the database
             .build()
     }
@@ -40,6 +41,10 @@ object NetworkRoomDataModule {
     @Provides
     @Singleton
     fun provideRegisterDao(db: AppDatabase) = db.registerDao()
+
+    @Provides
+    @Singleton
+    fun provideFavoriteDao(db: AppDatabase) = db.favoriteDao()
 
 
 }
