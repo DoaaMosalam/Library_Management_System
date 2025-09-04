@@ -3,13 +3,17 @@ package com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.doaa.mosalam.domain.model.favorite.FavoriteBooks
 import com.doaa.mosalam.domain.model.trendingBooks.Volume
 import com.doaa.mosalam.domain.useCase.BooksUseCase
 import com.doaa.mosalam.domain.useCase.CategoriesUseCase
+import com.doaa.mosalam.domain.useCase.FavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,6 +21,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val booksUseCase: BooksUseCase,
     private val categoryUseCase: CategoriesUseCase,
+    private val favoriteUseCase: FavoriteUseCase
 ) : ViewModel() {
     private val _books = MutableStateFlow<List<Volume>?>(null)
     val books: StateFlow<List<Volume>?> = _books
@@ -78,19 +83,39 @@ class HomeViewModel @Inject constructor(
     }
 
     fun toggleFavorite(book: Volume) {
-        val currentFavorites = _favoriteBooks.value.toMutableList()
-        if (currentFavorites.any { it.id == book.id }) {
-            // remove from favorites
-            currentFavorites.removeAll { it.id == book.id }
-        } else {
-            currentFavorites.add(book)
-        }
-        _favoriteBooks.value = currentFavorites
-    }
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val isFav = favoriteUseCase.isFavorite(book.id ?: "").first()
 
-    fun isBookFavorite(bookId: String): Boolean {
-        return _favoriteBooks.value.any { it.id == bookId }
+                if (isFav) {
+                    favoriteUseCase.removeFromFavorites(book.id ?: "")
+                    Log.d("HomeViewModel", "Book removed from favorites: ${book.id}")
+                } else {
+                    val favoriteBook = FavoriteBooks(
+                        id = book.id ?: "",
+                        title = book.volumeInfo?.title,
+                        authors = book.volumeInfo?.authors?.joinToString(", "),
+                        publisher = book.volumeInfo?.publisher,
+                        publishedDate = book.volumeInfo?.publishedDate,
+                        description = book.volumeInfo?.description,
+                        pageCount = book.volumeInfo?.pageCount,
+                        categories = book.volumeInfo?.categories?.joinToString(", "),
+                        averageRating = book.volumeInfo?.averageRating,
+                        ratingsCount = book.volumeInfo?.ratingsCount,
+                        thumbnail = book.volumeInfo?.imageLinks?.thumbnail
+                    )
+                    favoriteUseCase.addBooksToFavorites(favoriteBook)
+                    Log.d("HomeViewModel", "Book added to favorites: ${book.id}")
+                }
+            } catch (e: Exception) {
+                Log.e("HomeViewModel", "Error toggling favorite", e)
+            }
+        }
     }
+fun isBookFavorite(bookId: String): Flow<Boolean> {
+    return favoriteUseCase.isFavorite(bookId)
+}
+
 
 
 //=================================================================================================

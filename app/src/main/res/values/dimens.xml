@@ -14,4 +14,9 @@
     <dimen name="_95dp">95dp</dimen>
     <dimen name="_12dp">12dp</dimen>
     <dimen name="_250dp">250dp</dimen>
+    <dimen name="_8dp">8dp</dimen>
+    <dimen name="_4dp">4dp</dimen>
+    <dimen name="_160dp">160dp</dimen>
+    <dimen name="_240dp">240dp</dimen>
+    <dimen name="_16dp">16dp</dimen>
 </resources>

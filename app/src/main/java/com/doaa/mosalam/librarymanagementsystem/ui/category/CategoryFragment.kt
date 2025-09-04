@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.doaa.mosalam.librarymanagementsystem.R
@@ -15,17 +16,21 @@ import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentCategoryBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
 import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
+import com.doaa.mosalam.librarymanagementsystem.utils.CommonClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewModel>() {
-    override fun getLayoutResID(): Int = R.layout.fragment_category
-    private val vm: HomeViewModel by viewModels()
+    override val viewModel: HomeViewModel  by viewModels()
 
-    override val viewModel: HomeViewModel
-        get() = vm
+
+    override fun getLayoutResID(): Int = R.layout.fragment_category
+//    private val vm: HomeViewModel by viewModels()
+//
+//    override val viewModel: HomeViewModel
+//        get() = vm
 
     private lateinit var booksAdapter: BooksAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
@@ -35,6 +40,9 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
 
         // setUp user menu for username TextView
         setupUserMenu(binding.commonHeader.userName)
+        // init listeners
+        initListener()
+
         setupAdapter()
         // set adapter for categories
         setupCategoryAdapter()
@@ -49,21 +57,34 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
     override fun navigateToPayments() {
         TODO("Not yet implemented")
     }
+
+    private fun initListener() {
+        val commonClick = CommonClickListener { v ->
+            when (v.id) {
+                R.id.btn_myShelf -> v.findNavController()
+                    .navigate(R.id.action_categoryFragment_to_mySelfFragment)
+
+            }
+        }
+        binding.commonHeader.btnMyShelf.setOnClickListener (commonClick)
+    }
+
     private fun setupAdapter() {
         booksAdapter = BooksAdapter(
             onRentClick = { book ->
                 // TODO: handle rent click
             },
             onFavClick = { book ->
-                vm.toggleFavorite(book)
+                viewModel.toggleFavorite(book)
             },
             onItemClick = { book ->
 //                val action = HomeFragmentDirections.actionHomeFragmentToBookDetailsFragment(book.id ?: "")
 //                findNavController().navigate(action)
             },
             onCheckFavorite = { bookId ->
-                vm.isBookFavorite(bookId)
-            }
+                viewModel.isBookFavorite(bookId)
+            },
+            lifecycleOwner = viewLifecycleOwner
         )
         binding.rvCategoriesPage.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -73,7 +94,7 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
     // set adapter for categories
     private fun setupCategoryAdapter() {
         categoriesAdapter = CategoriesAdapter(emptyList()) { category ->
-            vm.getBooksByCategory(category)
+            viewModel.getBooksByCategory(category)
         }
         binding.rvCategoriesPage.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -85,28 +106,28 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
 
     private fun setupObservers() {
         lifecycleScope.launch {
-            vm.books.collectLatest { list ->
+            viewModel.books.collectLatest { list ->
                 booksAdapter.setData(list ?: emptyList())
             }
         }
 
         lifecycleScope.launch {
-            vm.loading.collectLatest { loading ->
+            viewModel.loading.collectLatest { loading ->
                 binding.progressIndicator.visibility = if (loading) View.VISIBLE else View.GONE
             }
         }
 
         lifecycleScope.launch {
-            vm.error.collectLatest { message ->
+            viewModel.error.collectLatest { message ->
                 message?.let {
                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                 }
             }
         }
         lifecycleScope.launch {
-            vm.categories.collectLatest { list ->
+            viewModel.categories.collectLatest { list ->
                 categoriesAdapter = CategoriesAdapter(list) { category ->
-                    vm.getBooksByCategory(category)
+                    viewModel.getBooksByCategory(category)
                 }
                 binding.rvCategoriesPage.adapter = categoriesAdapter
 
@@ -127,8 +148,4 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
             }
         }
     }
-
-
-
-
 }

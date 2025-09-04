@@ -1,7 +1,9 @@
 package com.doaa.mosalam.librarymanagementsystem.common.di
 
+import com.doaa.mosalam.domain.repo.FavoriteRepo
 import com.doaa.mosalam.domain.repo.LoginRepo
 import com.doaa.mosalam.domain.repo.RegisterRepo
+import com.doaa.mosalam.domain.useCase.FavoriteUseCase
 import com.doaa.mosalam.domain.useCase.LoginUseCase
 import com.doaa.mosalam.domain.useCase.RegisterUseCase
 import dagger.Module
@@ -26,5 +28,12 @@ object UseCaseRoomDatabaseModule {
     fun provideRegisterUseCase(registerRepo: RegisterRepo):
             RegisterUseCase {
         return RegisterUseCase(registerRepo)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavoriteUseCase(favoriteRepo: FavoriteRepo):
+            FavoriteUseCase{
+        return FavoriteUseCase(favoriteRepo)
     }
 }
