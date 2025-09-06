@@ -53,12 +53,18 @@
         <action
             android:id="@+id/action_homeFragment_to_mySelfFragment2"
             app:destination="@id/mySelfFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.details.DetailsFragment"
         android:label="DetailsFragment"
         tools:layout="@layout/fragment_details">
+
+        <argument
+            android:name="bookId"
+            app:argType="string"
+            app:nullable="true" />
 
         <action
             android:id="@+id/action_detailsFragment_to_profileFragment"
@@ -76,31 +82,32 @@
         android:id="@+id/trendingFragment"
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.trending.TrendingFragment"
         android:label="fragment_trending"
-        tools:layout="@layout/fragment_trending" >
-        <action
-            android:id="@+id/action_trendingFragment_to_detailsFragment2"
-            app:destination="@id/detailsFragment" />
+        tools:layout="@layout/fragment_trending">
         <action
             android:id="@+id/action_trendingFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
             android:id="@+id/action_trendingFragment_to_mySelfFragment"
             app:destination="@id/mySelfFragment" />
+        <action
+            android:id="@+id/action_trendingFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.category.CategoryFragment"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_category" >
-        <action
-            android:id="@+id/action_categoryFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+        tools:layout="@layout/fragment_category">
+
         <action
             android:id="@+id/action_categoryFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <action
             android:id="@+id/action_categoryFragment_to_mySelfFragment"
             app:destination="@id/mySelfFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -111,7 +118,7 @@
         android:id="@+id/mySelfFragment"
         android:name="com.doaa.mosalam.librarymanagementsystem.ui.mySelf.MySelfFragment"
         android:label="fragment_my_self"
-        tools:layout="@layout/fragment_my_self" >
+        tools:layout="@layout/fragment_my_self">
         <action
             android:id="@+id/action_mySelfFragment_to_profileFragment"
             app:destination="@id/profileFragment" />

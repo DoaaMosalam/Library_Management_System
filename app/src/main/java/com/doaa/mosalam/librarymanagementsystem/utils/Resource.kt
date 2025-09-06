@@ -1,4 +1,4 @@
-package com.doaa.mosalam.librarymanagementsystem.data.repository
+package com.doaa.mosalam.librarymanagementsystem.utils
 
 sealed class Resource<T>(
     val data: T? = null,

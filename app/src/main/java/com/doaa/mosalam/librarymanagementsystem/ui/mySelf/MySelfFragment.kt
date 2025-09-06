@@ -43,7 +43,7 @@ class MySelfFragment : BaseUserNameFragment<FragmentMySelfBinding, MySelfViewMod
 
     }
 
-    private fun setUpFavoriteAdapter(){
+    private fun setUpFavoriteAdapter() {
         fVBookAdapter = FavoriteBooksAdapter(
             onRemoveClick = { book -> viewModel.removeFromFavorites(book) },
             onStatusChange = { book, newStatus ->
@@ -55,16 +55,15 @@ class MySelfFragment : BaseUserNameFragment<FragmentMySelfBinding, MySelfViewMod
         binding.rvFVBooks.setHasFixedSize(true)
 
     }
-    private fun setupObservers(){
+
+    private fun setupObservers() {
         lifecycleScope.launch {
-            viewModel.favoriteBooks.collect { list->
+            viewModel.favoriteBooks.collect { list ->
                 fVBookAdapter.setData(list)
             }
         }
 
     }
-
-
 
 
 }

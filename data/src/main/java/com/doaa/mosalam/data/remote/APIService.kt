@@ -1,7 +1,9 @@
 package com.doaa.mosalam.data.remote
 
 import com.doaa.mosalam.domain.model.trendingBooks.BooksResponse
+import com.doaa.mosalam.domain.model.trendingBooks.Volume
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface APIService {
@@ -46,8 +48,8 @@ interface APIService {
     // Get Book Details by ID
     @GET("volumes/{id}")
     suspend fun getBookDetails(
-        @retrofit2.http.Path("id") id: String
-    ): BooksResponse
+       @Path("id") id: String
+    ): Volume
 
 
 }

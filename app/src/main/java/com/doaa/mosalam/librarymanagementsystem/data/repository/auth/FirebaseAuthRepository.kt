@@ -1,6 +1,6 @@
 package com.holeCode.novamoda.data.repository.auth
 
-import com.doaa.mosalam.librarymanagementsystem.data.repository.Resource
+import com.doaa.mosalam.librarymanagementsystem.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface FirebaseAuthRepository {

@@ -1,6 +1,6 @@
 package com.holeCode.novamoda.data.repository.auth
 
-import com.doaa.mosalam.librarymanagementsystem.data.repository.Resource
+import com.doaa.mosalam.librarymanagementsystem.utils.Resource
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
