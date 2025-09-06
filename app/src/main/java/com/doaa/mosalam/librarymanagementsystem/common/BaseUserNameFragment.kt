@@ -26,10 +26,10 @@ abstract class BaseUserNameFragment<VB : ViewDataBinding, VM : ViewModel>
                         true
                     }
 
-                    R.id.logout -> {
-                        handleLogout()
-                        true
-                    }
+//                    R.id.logout -> {
+//                        handleLogout()
+//                        true
+//                    }
 
                     else -> false
                 }
@@ -41,5 +41,5 @@ abstract class BaseUserNameFragment<VB : ViewDataBinding, VM : ViewModel>
     // can be abstract if each Fragment has different navigation
     abstract fun navigateToProfile()
     abstract fun navigateToPayments()
-    protected open fun handleLogout() {}
+//    protected open fun handleLogout() {}
 }

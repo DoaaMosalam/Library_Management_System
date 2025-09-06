@@ -5,12 +5,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentDetailsBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.details.viewModel.DetailsViewModel
+import com.doaa.mosalam.librarymanagementsystem.utils.CommonClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -33,10 +35,14 @@ class DetailsFragment : BaseUserNameFragment<FragmentDetailsBinding, DetailsView
 
         lifecycleScope.launch {
             viewModel.getBookDetails(bookId!!)
-
         }
 
+        // init listeners
+        initListener()
+
+        // setup observers
         setUpObserve()
+
     }
 
     override fun navigateToProfile() {
@@ -45,6 +51,17 @@ class DetailsFragment : BaseUserNameFragment<FragmentDetailsBinding, DetailsView
 
     override fun navigateToPayments() {
         TODO("Not yet implemented")
+    }
+
+    private fun initListener() {
+        val commonClick = CommonClickListener { v ->
+            when (v.id) {
+                R.id.btn_myShelf -> v.findNavController()
+                    .navigate(R.id.action_detailsFragment_to_mySelfFragment)
+
+            }
+        }
+        binding.commonHeader.btnMyShelf.setOnClickListener(commonClick)
     }
 
     private fun setUpObserve() {
@@ -89,4 +106,6 @@ class DetailsFragment : BaseUserNameFragment<FragmentDetailsBinding, DetailsView
             }
         }
     }
+
+
 }

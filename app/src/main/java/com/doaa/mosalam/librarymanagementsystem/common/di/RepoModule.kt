@@ -51,5 +51,4 @@ object RepoModule {
         return DetailsRepoImp(apiService)
     }
 
-
 }

@@ -36,6 +36,12 @@ android {
         buildConfigField("String", "FB_LOGIN_PROTOCOL_SCHEME", "\"fb1133601105320249\"")
         buildConfigField("String", "FACEBOOK_CLIENT_TOKEN", "\"3b9098897b7b86792bf108bc55337b78\"")
 
+        buildConfigField("String", "BASE_URL", "\"https://www.googleapis.com/books/v1/\"")
+
+//        vectorDrawables {
+//            useSupportLibrary = true
+//        }
+
 
     }
 

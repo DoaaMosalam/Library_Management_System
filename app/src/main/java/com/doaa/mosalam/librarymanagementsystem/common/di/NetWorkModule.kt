@@ -1,6 +1,7 @@
 package com.doaa.mosalam.librarymanagementsystem.common.di
 
 import com.doaa.mosalam.data.remote.APIService
+import com.doaa.mosalam.librarymanagementsystem.BuildConfig.BASE_URL
 import com.doaa.mosalam.librarymanagementsystem.utils.Constant
 import dagger.Module
 import dagger.Provides
@@ -19,7 +20,7 @@ object NetWorkModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constant.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

@@ -27,10 +27,6 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
 
 
     override fun getLayoutResID(): Int = R.layout.fragment_category
-//    private val vm: HomeViewModel by viewModels()
-//
-//    override val viewModel: HomeViewModel
-//        get() = vm
 
     private lateinit var booksAdapter: BooksAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter

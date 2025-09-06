@@ -9,7 +9,7 @@ object Constant {
      * **/
 
 
-    const val BASE_URL = "https://www.googleapis.com/books/v1/"
+//    const val BASE_URL = "https://www.googleapis.com/books/v1/"
 //    books/
 //    const val BASE_URL= "https://80787bd1b4d3.ngrok-free.app/"
 
