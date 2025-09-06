@@ -15,62 +15,64 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_5dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        <include
-            android:id="@+id/commonHeader"
-            layout="@layout/layout_common_header"/>
 
-            <!-- Title -->
-            <TextView
-                android:id="@+id/tvMyShelfTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/myshelf"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_marginBottom="4dp"/>
-
-            <!-- Subtitle -->
-            <TextView
-                android:id="@+id/tvMyShelfSubtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/manage_your_reading_journey"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginBottom="16dp"/>
-
-            <!-- Tabs -->
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:tabIndicatorColor="@android:color/white"
-                app:tabSelectedTextColor="@color/black"
-                app:tabTextColor="@color/peach_beige"
-                app:tabBackground="@drawable/bg_pill_primary"
-                android:layout_marginBottom="16dp"/>
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <!-- Book Grid -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvFVBooks"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingBottom="8dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="4"
-                android:layout_marginTop="4dp"/>
+                <include
+                    android:id="@+id/commonHeader"
+                    layout="@layout/layout_common_header" />
 
-        </LinearLayout>
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/tvMyShelfTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/myshelf"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginBottom="4dp" />
+
+                <!-- Subtitle -->
+                <TextView
+                    android:id="@+id/tvMyShelfSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manage_your_reading_journey"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Tabs -->
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabIndicatorColor="@android:color/white"
+                    app:tabSelectedTextColor="@color/black"
+                    app:tabTextColor="@color/peach_beige"
+                    app:tabBackground="@drawable/bg_pill_primary"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Book Grid -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvFVBooks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingBottom="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="3"
+                    android:layout_marginTop="4dp" />
+
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

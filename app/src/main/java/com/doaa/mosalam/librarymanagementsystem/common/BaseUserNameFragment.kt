@@ -4,7 +4,6 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.findNavController
 import com.doaa.mosalam.librarymanagementsystem.R
 
 abstract class BaseUserNameFragment<VB : ViewDataBinding, VM : ViewModel>
@@ -21,14 +20,17 @@ abstract class BaseUserNameFragment<VB : ViewDataBinding, VM : ViewModel>
                         navigateToProfile()
                         true
                     }
+
                     R.id.payments -> {
                         navigateToPayments()
                         true
                     }
+
                     R.id.logout -> {
                         handleLogout()
                         true
                     }
+
                     else -> false
                 }
             }
@@ -37,7 +39,7 @@ abstract class BaseUserNameFragment<VB : ViewDataBinding, VM : ViewModel>
     }
 
     // can be abstract if each Fragment has different navigation
-    abstract  fun navigateToProfile()
+    abstract fun navigateToProfile()
     abstract fun navigateToPayments()
     protected open fun handleLogout() {}
 }

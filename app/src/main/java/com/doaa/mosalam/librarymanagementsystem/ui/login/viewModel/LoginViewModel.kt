@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.doaa.mosalam.domain.model.login.Login
 import com.doaa.mosalam.domain.useCase.LoginUseCase
-import com.doaa.mosalam.librarymanagementsystem.data.repository.Resource
+import com.doaa.mosalam.librarymanagementsystem.utils.Resource
 import com.doaa.mosalam.librarymanagementsystem.utils.isEmailValid
 import com.doaa.mosalam.librarymanagementsystem.utils.isPasswordValid
 import com.holeCode.novamoda.data.repository.auth.FirebaseAuthRepository

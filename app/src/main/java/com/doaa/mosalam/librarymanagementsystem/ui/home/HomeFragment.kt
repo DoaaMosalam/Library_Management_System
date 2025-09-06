@@ -1,7 +1,6 @@
 package com.doaa.mosalam.librarymanagementsystem.ui.home
 
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -16,11 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
 import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
+import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentHomeBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
 import com.doaa.mosalam.librarymanagementsystem.ui.search.SearchViewModel
 import com.doaa.mosalam.librarymanagementsystem.ui.search.debounceSearch
-import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.utils.CommonClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -155,9 +154,9 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
                 vm.toggleFavorite(book)
             },
             onItemClick = { book ->
-//                val action = HomeFragmentDirections.actionHomeFragmentToBookDetailsFragment(book.id ?: "")
-//                findNavController().navigate(action)
-               findNavController().navigate(R.id.action_homeFragment_to_detailsFragment)
+                val action = HomeFragmentDirections
+                    .actionHomeFragmentToDetailsFragment(book.id ?: "")
+                findNavController().navigate(action)
             },
             onCheckFavorite = { bookId ->
                 vm.isBookFavorite(bookId)
@@ -191,6 +190,7 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
 
                 R.id.viewAllCategories -> v.findNavController()
                     .navigate(R.id.action_homeFragment_to_categoryFragment)
+
                 R.id.btn_myShelf -> v.findNavController()
                     .navigate(R.id.action_homeFragment_to_mySelfFragment)
 
@@ -199,9 +199,8 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
         }
         binding.viewAllTrending.setOnClickListener(commonClick)
         binding.viewAllCategories.setOnClickListener(commonClick)
-        binding.commonHeader.btnMyShelf.setOnClickListener (commonClick)
+        binding.commonHeader.btnMyShelf.setOnClickListener(commonClick)
     }
-
 
 
 }

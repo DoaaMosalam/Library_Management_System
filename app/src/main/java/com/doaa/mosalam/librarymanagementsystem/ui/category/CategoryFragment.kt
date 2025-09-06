@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
 import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
+import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentCategoryBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
-import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.utils.CommonClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewModel>() {
-    override val viewModel: HomeViewModel  by viewModels()
+    override val viewModel: HomeViewModel by viewModels()
 
 
     override fun getLayoutResID(): Int = R.layout.fragment_category
@@ -66,7 +66,7 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
 
             }
         }
-        binding.commonHeader.btnMyShelf.setOnClickListener (commonClick)
+        binding.commonHeader.btnMyShelf.setOnClickListener(commonClick)
     }
 
     private fun setupAdapter() {
@@ -78,8 +78,11 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
                 viewModel.toggleFavorite(book)
             },
             onItemClick = { book ->
-//                val action = HomeFragmentDirections.actionHomeFragmentToBookDetailsFragment(book.id ?: "")
-//                findNavController().navigate(action)
+                book.id?.let { id ->
+                    val action =
+                        CategoryFragmentDirections.actionCategoryFragmentToDetailsFragment(id)
+                    findNavController().navigate(action)
+                }
             },
             onCheckFavorite = { bookId ->
                 viewModel.isBookFavorite(bookId)

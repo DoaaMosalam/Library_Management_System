@@ -112,10 +112,10 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-fun isBookFavorite(bookId: String): Flow<Boolean> {
-    return favoriteUseCase.isFavorite(bookId)
-}
 
+    fun isBookFavorite(bookId: String): Flow<Boolean> {
+        return favoriteUseCase.isFavorite(bookId)
+    }
 
 
 //=================================================================================================

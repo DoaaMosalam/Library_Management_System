@@ -55,7 +55,7 @@ class FavoriteBooksAdapter(
                 .placeholder(R.drawable.bg_placeholder)
                 .into(imgCover)
 
-         // button to remove from favorite
+            // button to remove from favorite
 //            btnRemoveFav.setOnClickListener {
 //                onRemoveClick(fvBooks)
 //            }

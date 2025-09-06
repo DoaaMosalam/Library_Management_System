@@ -9,11 +9,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
-import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
-import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
+import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentTrendingBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
-import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.utils.CommonClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -22,10 +20,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TrendingFragment : BaseUserNameFragment<FragmentTrendingBinding, HomeViewModel>() {
     override val viewModel: HomeViewModel by viewModels()
-//    private val vm: HomeViewModel by viewModels()
-//
-//    override val viewModel: HomeViewModel
-//        get() = vm
 
 
     override fun navigateToProfile() {
@@ -35,6 +29,7 @@ class TrendingFragment : BaseUserNameFragment<FragmentTrendingBinding, HomeViewM
     override fun navigateToPayments() {
         TODO("Not yet implemented")
     }
+
     override fun getLayoutResID(): Int = R.layout.fragment_trending
     private lateinit var adapter: BooksAdapter
 
@@ -62,8 +57,9 @@ class TrendingFragment : BaseUserNameFragment<FragmentTrendingBinding, HomeViewM
 
             }
         }
-        binding.commonHeader.btnMyShelf.setOnClickListener (commonClick)
+        binding.commonHeader.btnMyShelf.setOnClickListener(commonClick)
     }
+
     private fun setupAdapter() {
         adapter = BooksAdapter(
             onRentClick = { book ->
@@ -73,16 +69,18 @@ class TrendingFragment : BaseUserNameFragment<FragmentTrendingBinding, HomeViewM
                 viewModel.toggleFavorite(book)
             },
             onItemClick = { book ->
-//                val action = HomeFragmentDirections.actionHomeFragmentToBookDetailsFragment(book.id ?: "")
-//                findNavController().navigate(action)
+                book.id?.let { id ->
+                    val action =
+                        TrendingFragmentDirections.actionTrendingFragmentToDetailsFragment(id)
+                    findNavController().navigate(action)
+
+                }
             },
             onCheckFavorite = { bookId ->
                 viewModel.isBookFavorite(bookId)
             },
             lifecycleOwner = viewLifecycleOwner
         )
-//        binding.rvTrendingBooksPage.layoutManager =
-//            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvTrendingBooksPage.adapter = adapter
     }
 
@@ -112,8 +110,6 @@ class TrendingFragment : BaseUserNameFragment<FragmentTrendingBinding, HomeViewM
             }
         }
     }
-
-
 
 
 }

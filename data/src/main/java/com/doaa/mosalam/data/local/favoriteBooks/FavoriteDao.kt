@@ -20,6 +20,4 @@ interface FavoriteDao {
     @Query("UPDATE favorite_books SET readingStatus = :status WHERE id = :bookId")
     suspend fun updateReadingStatus(bookId: String, status: String)
 
-//    @Query("SELECT EXISTS(SELECT 1 FROM favorite_books WHERE id = :bookId)")
-//    fun isFavorite(bookId: String): Flow<Boolean>
 }

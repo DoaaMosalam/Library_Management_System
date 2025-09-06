@@ -45,6 +45,7 @@ credentials = "1.5.0"
 credentialsPlayServicesAuth = "1.5.0"
 googleid = "1.1.1"
 uiAndroid = "1.9.0"
+safeArgs = "2.7.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -102,6 +103,7 @@ kspkotlin_plugin =  {id="com.google.devtools.ksp",version.ref = "kspkotlindeve"}
 kspkotlin = {id = "com.google.devtools.ksp"}
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
+navigation-safe-args = { id = "androidx.navigation.safeargs", version.ref = "safeArgs" }
 
 
 

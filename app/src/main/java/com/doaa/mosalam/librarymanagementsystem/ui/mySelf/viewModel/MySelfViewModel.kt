@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MySelfViewModel @Inject constructor(
     private val favoriteUseCase: FavoriteUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _favoriteBooks = MutableStateFlow<List<FavoriteBooks>>(emptyList())
     val favoriteBooks: StateFlow<List<FavoriteBooks>> = _favoriteBooks.asStateFlow()
 
@@ -22,14 +22,16 @@ class MySelfViewModel @Inject constructor(
 
         observeFavorites()
     }
-     fun observeFavorites(){
+
+    fun observeFavorites() {
         viewModelScope.launch {
             favoriteUseCase.getBooksFromFavorites().collect { books ->
-                _favoriteBooks.value= books
+                _favoriteBooks.value = books
             }
 
         }
     }
+
     fun changeReadingStatus(book: FavoriteBooks, newStatus: String) {
         viewModelScope.launch {
             // ببساطة: احذفي القديم + دخلي نسخة جديدة بالحالة الجديدة

@@ -3,11 +3,11 @@
     android:background="@drawable/design_user_name">
     <item
         android:id="@+id/profile"
-        android:title="@string/profile"/>
+        android:title="@string/profile" />
     <item
         android:id="@+id/payments"
-        android:title="@string/payments"/>
+        android:title="@string/payments" />
     <item
         android:id="@+id/logout"
-        android:title="@string/logout"/>
+        android:title="@string/logout" />
 </menu>
