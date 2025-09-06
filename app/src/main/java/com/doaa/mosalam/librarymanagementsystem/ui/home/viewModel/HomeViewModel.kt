@@ -50,7 +50,6 @@ class HomeViewModel @Inject constructor(
             _isLoading.value = true
             try {
                 val response = booksUseCase.getTrendingBooks()
-                Log.d("HomeViewModel", "Books count: ${response.items?.size}")
                 _books.value = (response.items ?: emptyList()) as List<Volume>?
 
                 val allCategories = response.items
@@ -73,7 +72,6 @@ class HomeViewModel @Inject constructor(
             try {
                 val response = categoryUseCase.getBooksByCategory(category)
                 _booksByCategory.value = (response.items ?: emptyList()) as List<Volume>
-                Log.d("HomeViewModel", "Books for $category: ${response.items?.size}")
             } catch (e: Exception) {
                 _error.value = e.message
             } finally {
@@ -89,7 +87,6 @@ class HomeViewModel @Inject constructor(
 
                 if (isFav) {
                     favoriteUseCase.removeFromFavorites(book.id ?: "")
-                    Log.d("HomeViewModel", "Book removed from favorites: ${book.id}")
                 } else {
                     val favoriteBook = FavoriteBooks(
                         id = book.id ?: "",

@@ -10,6 +10,7 @@ import com.doaa.mosalam.librarymanagementsystem.adapter.FavoriteBooksAdapter
 import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentMySelfBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.mySelf.viewModel.MySelfViewModel
+
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -27,8 +28,10 @@ class MySelfFragment : BaseUserNameFragment<FragmentMySelfBinding, MySelfViewMod
     override fun navigateToPayments() {
         TODO("Not yet implemented")
     }
-
+//    val tabLayout: TabLayout by lazy { binding.tabLayout }
+//    val viewPager: ViewPager2 by lazy { binding.viewPager }
     private lateinit var fVBookAdapter: FavoriteBooksAdapter
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +44,27 @@ class MySelfFragment : BaseUserNameFragment<FragmentMySelfBinding, MySelfViewMod
 
         viewModel.observeFavorites()
 
+
+
+
+//        val adapter = BooksPagerAdapter(this)
+//        viewPager.adapter = adapter
+//
+//        tabStatueReading()
+
     }
+    // create table layout include(All Books, Currently Reading, Rented, Finished)
+
+//    private fun tabStatueReading() {
+//        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+//            when (position) {
+//                0 -> tab.text = "All Books"
+//                1 -> tab.text = "Currently Reading"
+//                2 -> tab.text = "Rented"
+//                3 -> tab.text = "Finished"
+//            }
+//        }.attach()
+//    }
 
     private fun setUpFavoriteAdapter() {
         fVBookAdapter = FavoriteBooksAdapter(
@@ -64,6 +87,9 @@ class MySelfFragment : BaseUserNameFragment<FragmentMySelfBinding, MySelfViewMod
         }
 
     }
+
+
+
 
 
 }

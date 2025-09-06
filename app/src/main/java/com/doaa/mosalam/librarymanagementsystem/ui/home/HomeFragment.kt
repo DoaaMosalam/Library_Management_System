@@ -68,6 +68,7 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
     private fun setupObservers() {
         lifecycleScope.launch {
             vm.books.collectLatest { list ->
+
                 booksAdapter.setData(list ?: emptyList())
             }
         }
@@ -147,8 +148,7 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
     private fun setupAdapter() {
         booksAdapter = BooksAdapter(
             onRentClick = { book ->
-                // TODO: handle rent click
-
+                Toast.makeText( requireContext(), "You rented ${book.id}", Toast.LENGTH_SHORT).show()
             },
             onFavClick = { book ->
                 vm.toggleFavorite(book)
