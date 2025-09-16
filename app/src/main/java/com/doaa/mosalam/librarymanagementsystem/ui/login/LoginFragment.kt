@@ -42,10 +42,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : BasicFragment<FragmentLoginBinding, LoginViewModel>(), TextWatcher {
-    private val vm: LoginViewModel by viewModels()
-
-    override val viewModel: LoginViewModel
-        get() = vm
+    override val viewModel: LoginViewModel by viewModels()
 
 
     override fun getLayoutResID(): Int = R.layout.fragment_login
@@ -68,18 +65,17 @@ class LoginFragment : BasicFragment<FragmentLoginBinding, LoginViewModel>(), Tex
         initFocusListeners()
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            vm.isSignInEnabled.collect { binding.btnLogin.isEnabled = it }
+            viewModel.isSignInEnabled.collect { binding.btnLogin.isEnabled = it }
         }
 
-        binding.btnLogin.setOnClickListener { vm.loginUser() }
+        binding.btnLogin.setOnClickListener { viewModel.loginUser() }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            vm.uiState.collect { state ->
+            viewModel.uiState.collect { state ->
                 when (state) {
                     is LoginViewModel.UiState.Loading -> {
                         //  Progress
                         progressDialog.show()
-//                        progressBar?.visibility = View.VISIBLE
                     }
 
                     is LoginViewModel.UiState.Success -> {
@@ -104,7 +100,7 @@ class LoginFragment : BasicFragment<FragmentLoginBinding, LoginViewModel>(), Tex
         }
 
         binding.btnLogin.setOnClickListener {
-            vm.loginUser()
+            viewModel.loginUser()
         }
 
     }  // end of onViewCreated
@@ -284,8 +280,8 @@ class LoginFragment : BasicFragment<FragmentLoginBinding, LoginViewModel>(), Tex
 
 
     override fun afterTextChanged(s: Editable?) {
-        vm.onEmailChanged(binding.edEmailLogin.text.toString())
-        vm.onPasswordChanged(binding.edPasswordLogin.text.toString())
+        viewModel.onEmailChanged(binding.edEmailLogin.text.toString())
+        viewModel.onPasswordChanged(binding.edPasswordLogin.text.toString())
     }
 
     override fun beforeTextChanged(

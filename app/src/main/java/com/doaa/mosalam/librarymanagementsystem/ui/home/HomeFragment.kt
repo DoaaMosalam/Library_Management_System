@@ -27,11 +27,13 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() {
-    override fun getLayoutResID(): Int = R.layout.fragment_home
-    private val vm: HomeViewModel by viewModels()
+    override val viewModel: HomeViewModel by viewModels()
 
-    override val viewModel: HomeViewModel
-        get() = vm
+    override fun getLayoutResID(): Int = R.layout.fragment_home
+//    private val vm: HomeViewModel by viewModels()
+
+//    override val viewModel: HomeViewModel
+//        get() = vm
 
     override fun navigateToProfile() {
         findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
@@ -57,7 +59,7 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
 
         setupObservers()
         initListener()
-        vm.getTrendingBooks()
+        viewModel.getTrendingBooks()
 
         val searchEdit = binding.commonHeader.searchInput
         setupSearchEdit(searchEdit)
@@ -67,20 +69,20 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
     // Observers to handle data changes and update UI
     private fun setupObservers() {
         lifecycleScope.launch {
-            vm.books.collectLatest { list ->
+            viewModel.books.collectLatest { list ->
 
                 booksAdapter.setData(list ?: emptyList())
             }
         }
 
         lifecycleScope.launch {
-            vm.loading.collectLatest { loading ->
+            viewModel.loading.collectLatest { loading ->
                 binding.progressIndicator.visibility = if (loading) View.VISIBLE else View.GONE
             }
         }
 
         lifecycleScope.launch {
-            vm.error.collectLatest { message ->
+            viewModel.error.collectLatest { message ->
                 message?.let {
                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                 }
@@ -88,9 +90,9 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
         }
 
         lifecycleScope.launch {
-            vm.categories.collectLatest { list ->
+            viewModel.categories.collectLatest { list ->
                 categoriesAdapter = CategoriesAdapter(list) { category ->
-                    vm.getBooksByCategory(category)
+                    viewModel.getBooksByCategory(category)
                 }
                 binding.rvCategories.adapter = categoriesAdapter
 
@@ -121,7 +123,7 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
                     binding.rvTrendingBooks.adapter = booksAdapter
                 } else {
                     // show trending books if search results are empty
-                    vm.books.collectLatest { trending ->
+                    viewModel.books.collectLatest { trending ->
                         booksAdapter.setData(trending ?: emptyList())
                         binding.rvTrendingBooks.adapter = booksAdapter
                     }
@@ -136,7 +138,7 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
 
         searchEdit.debounceSearch(viewLifecycleOwner) { query ->
             if (query.isEmpty()) {
-                vm.getTrendingBooks()       // Show Trending Books when search is cleared
+                viewModel.getTrendingBooks()       // Show Trending Books when search is cleared
             } else {
                 searchViewModel.searchBooks(query) // Call Search API
             }
@@ -148,10 +150,10 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
     private fun setupAdapter() {
         booksAdapter = BooksAdapter(
             onRentClick = { book ->
-                Toast.makeText( requireContext(), "You rented ${book.id}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "You rented ${book.id}", Toast.LENGTH_SHORT).show()
             },
             onFavClick = { book ->
-                vm.toggleFavorite(book)
+                viewModel.toggleFavorite(book)
             },
             onItemClick = { book ->
                 val action = HomeFragmentDirections
@@ -159,7 +161,7 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
                 findNavController().navigate(action)
             },
             onCheckFavorite = { bookId ->
-                vm.isBookFavorite(bookId)
+                viewModel.isBookFavorite(bookId)
             },
             lifecycleOwner = viewLifecycleOwner
         )
@@ -171,7 +173,7 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
     // set adapter for categories
     private fun setupCategoryAdapter() {
         categoriesAdapter = CategoriesAdapter(emptyList()) { category ->
-            vm.getBooksByCategory(category)
+            viewModel.getBooksByCategory(category)
         }
         binding.rvCategories.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
