@@ -26,7 +26,7 @@ class MySelfFragment : BaseUserNameFragment<FragmentMySelfBinding, MySelfViewMod
     }
 
     override fun navigateToPayments() {
-        TODO("Not yet implemented")
+        findNavController().navigate(R.id.action_mySelfFragment_to_paymentFragment)
     }
 
     //    val tabLayout: TabLayout by lazy { binding.tabLayout }

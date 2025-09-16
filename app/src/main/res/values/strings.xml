@@ -78,4 +78,20 @@
     <string name="currently_reading">Currently Reading</string>
     <string name="rented">Rented</string>
     <string name="finished">Finished</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="amount_to_pay_12_97">Amount to Pay: $12.97</string>
+    <string name="payment_method_credit_card">Payment Method: Credit Card</string>
+    <string name="pending_payments_2">Pending Payments: 2</string>
+    <string name="outstanding_balance_12_97">Outstanding Balance: $12.97</string>
+    <string name="invoice_summary">Invoice Summary</string>
+    <string name="credit_debit_card_nvisa_4242">Credit/Debit Card\nVISA **** 4242</string>
+    <string name="book">Book</string>
+    <string name="amount">Amount</string>
+    <string name="date_rented">Date Rented</string>
+    <string name="status">Status</string>
+    <string name="bookname">BookName</string>
+    <string name="oct_15_2023">Oct 15, 2023</string>
+    <string name="_4_99">$4.99</string>
+    <string name="pending">Pending</string>
+    <string name="rental_history">Rental History</string>
 </resources>

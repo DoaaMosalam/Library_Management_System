@@ -30,9 +30,6 @@ class ProfileFragment : BaseUserNameFragment<FragmentProfileBinding, ProfileView
         // init preferences
         userPreferences = UserPreferences(requireContext())
 
-        // init preferences
-        userPreferences = UserPreferences(requireContext())
-
         val savedEmail = userPreferences.getUserEmail()
 
         if (!savedEmail.isNullOrEmpty()) {
@@ -58,7 +55,7 @@ class ProfileFragment : BaseUserNameFragment<FragmentProfileBinding, ProfileView
             val savedUser = userPreferences.getUser()
 
             if (savedUser.email.isNotEmpty()) {
-                // اعمل Dialog تأكيد
+                //dialog alert
                 AlertDialog.Builder(requireContext())
                     .setTitle("Delete Account")
                     .setMessage("Are you sure you want to delete your account?")
@@ -169,6 +166,6 @@ class ProfileFragment : BaseUserNameFragment<FragmentProfileBinding, ProfileView
     }
 
     override fun navigateToPayments() {
-        TODO("Not yet implemented")
+        findNavController().navigate(R.id.action_profileFragment_to_paymentFragment)
     }
 }

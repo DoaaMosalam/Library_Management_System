@@ -2,6 +2,7 @@ package com.doaa.mosalam.librarymanagementsystem.ui.trending
 
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +13,8 @@ import com.doaa.mosalam.librarymanagementsystem.adapter.BooksAdapter
 import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentTrendingBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
+import com.doaa.mosalam.librarymanagementsystem.ui.search.SearchViewModel
+import com.doaa.mosalam.librarymanagementsystem.ui.search.debounceSearch
 import com.doaa.mosalam.librarymanagementsystem.utils.CommonClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -27,11 +30,12 @@ class TrendingFragment : BaseUserNameFragment<FragmentTrendingBinding, HomeViewM
     }
 
     override fun navigateToPayments() {
-        TODO("Not yet implemented")
+        findNavController().navigate(R.id.action_trendingFragment_to_paymentFragment)
     }
 
     override fun getLayoutResID(): Int = R.layout.fragment_trending
     private lateinit var adapter: BooksAdapter
+    private val searchViewModel: SearchViewModel by viewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,6 +50,9 @@ class TrendingFragment : BaseUserNameFragment<FragmentTrendingBinding, HomeViewM
         setupObservers()
 
         viewModel.getTrendingBooks()
+
+        val searchEdit = binding.commonHeader.searchInput
+        setupSearchEdit(searchEdit)
 
     }
 
@@ -107,6 +114,19 @@ class TrendingFragment : BaseUserNameFragment<FragmentTrendingBinding, HomeViewM
         lifecycleScope.launch {
             viewModel.favoriteBooks.collect { favorites ->
                 adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun setupSearchEdit(editText: EditText) {
+
+        val searchEdit = binding.commonHeader.searchInput
+
+        searchEdit.debounceSearch(viewLifecycleOwner) { query ->
+            if (query.isEmpty()) {
+                viewModel.getTrendingBooks()       // Show Trending Books when search is cleared
+            } else {
+                searchViewModel.searchBooks(query) // Call Search API
             }
         }
     }

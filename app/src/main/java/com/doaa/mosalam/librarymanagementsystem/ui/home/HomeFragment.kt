@@ -30,18 +30,16 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
     override val viewModel: HomeViewModel by viewModels()
 
     override fun getLayoutResID(): Int = R.layout.fragment_home
-//    private val vm: HomeViewModel by viewModels()
-
-//    override val viewModel: HomeViewModel
-//        get() = vm
 
     override fun navigateToProfile() {
         findNavController().navigate(R.id.action_homeFragment_to_profileFragment)
     }
 
     override fun navigateToPayments() {
-        TODO("Not yet implemented")
+        findNavController().navigate(R.id.action_homeFragment_to_paymentFragment)
     }
+    // browse collection
+
 
     private val searchViewModel: SearchViewModel by viewModels()
 
@@ -196,12 +194,16 @@ class HomeFragment : BaseUserNameFragment<FragmentHomeBinding, HomeViewModel>() 
                 R.id.btn_myShelf -> v.findNavController()
                     .navigate(R.id.action_homeFragment_to_mySelfFragment)
 
+                R.id.btnBrowse -> v.findNavController()
+                    .navigate(R.id.action_homeFragment_to_mySelfFragment)
+
 
             }
         }
         binding.viewAllTrending.setOnClickListener(commonClick)
         binding.viewAllCategories.setOnClickListener(commonClick)
         binding.commonHeader.btnMyShelf.setOnClickListener(commonClick)
+        binding.btnBrowse.setOnClickListener(commonClick)
     }
 
 

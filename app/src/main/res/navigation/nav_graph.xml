@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_homeFragment_to_mySelfFragment2"
             app:destination="@id/mySelfFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
 
     </fragment>
     <fragment
@@ -72,6 +75,9 @@
         <action
             android:id="@+id/action_detailsFragment_to_mySelfFragment"
             app:destination="@id/mySelfFragment" />
+        <action
+            android:id="@+id/action_detailsFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
@@ -95,6 +101,9 @@
         <action
             android:id="@+id/action_trendingFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_trendingFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -111,6 +120,9 @@
         <action
             android:id="@+id/action_categoryFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -120,6 +132,9 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/mySelfFragment"
@@ -128,6 +143,18 @@
         tools:layout="@layout/fragment_my_self">
         <action
             android:id="@+id/action_mySelfFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_mySelfFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.doaa.mosalam.librarymanagementsystem.ui.payment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment">
+        <action
+            android:id="@+id/action_paymentFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
 </navigation>

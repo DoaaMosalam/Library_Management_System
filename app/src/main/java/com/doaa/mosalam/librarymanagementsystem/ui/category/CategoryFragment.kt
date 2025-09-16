@@ -2,6 +2,7 @@ package com.doaa.mosalam.librarymanagementsystem.ui.category
 
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -16,6 +17,8 @@ import com.doaa.mosalam.librarymanagementsystem.adapter.CategoriesAdapter
 import com.doaa.mosalam.librarymanagementsystem.common.BaseUserNameFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentCategoryBinding
 import com.doaa.mosalam.librarymanagementsystem.ui.home.viewModel.HomeViewModel
+import com.doaa.mosalam.librarymanagementsystem.ui.search.SearchViewModel
+import com.doaa.mosalam.librarymanagementsystem.ui.search.debounceSearch
 import com.doaa.mosalam.librarymanagementsystem.utils.CommonClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -30,6 +33,7 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
 
     private lateinit var booksAdapter: BooksAdapter
     private lateinit var categoriesAdapter: CategoriesAdapter
+    private val searchViewModel: SearchViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +48,9 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
         setupCategoryAdapter()
 
         setupObservers()
+
+        val searchEdit = binding.commonHeader.searchInput
+        setupSearchEdit(searchEdit)
     }
 
     override fun navigateToProfile() {
@@ -51,7 +58,7 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
     }
 
     override fun navigateToPayments() {
-        TODO("Not yet implemented")
+        findNavController().navigate(R.id.action_categoryFragment_to_paymentFragment)
     }
 
     private fun initListener() {
@@ -144,6 +151,19 @@ class CategoryFragment : BaseUserNameFragment<FragmentCategoryBinding, HomeViewM
         lifecycleScope.launch {
             viewModel.favoriteBooks.collect { favorites ->
                 booksAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun setupSearchEdit(editText: EditText) {
+
+        val searchEdit = binding.commonHeader.searchInput
+
+        searchEdit.debounceSearch(viewLifecycleOwner) { query ->
+            if (query.isEmpty()) {
+                viewModel.getTrendingBooks()       // Show Trending Books when search is cleared
+            } else {
+                searchViewModel.searchBooks(query) // Call Search API
             }
         }
     }

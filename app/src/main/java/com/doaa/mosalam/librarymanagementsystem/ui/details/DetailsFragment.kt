@@ -50,7 +50,7 @@ class DetailsFragment : BaseUserNameFragment<FragmentDetailsBinding, DetailsView
     }
 
     override fun navigateToPayments() {
-        TODO("Not yet implemented")
+        findNavController().navigate(R.id.action_detailsFragment_to_paymentFragment)
     }
 
     private fun initListener() {

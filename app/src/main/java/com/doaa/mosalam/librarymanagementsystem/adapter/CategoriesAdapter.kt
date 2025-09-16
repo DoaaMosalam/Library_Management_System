@@ -8,7 +8,7 @@ import com.doaa.mosalam.librarymanagementsystem.databinding.ItemCategoryChipBind
 
 class CategoriesAdapter(
     private val categories: List<String>,
-    private val onCategoryClick: (String) -> Unit
+    private val onCategoryClick: (String) -> Unit,
 ) : RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder>() {
 
     inner class CategoryViewHolder(private val binding: ItemCategoryChipBinding) :
