@@ -25,7 +25,7 @@ class LoginRepoImp(
                 password = registerEntity.password
             )
             loginDAO.insertLogin(loginEntity)
-            loginEntity.toLoginDomain() // تحويل لـ domain
+            loginEntity.toLoginDomain()
         } else {
             null
         }

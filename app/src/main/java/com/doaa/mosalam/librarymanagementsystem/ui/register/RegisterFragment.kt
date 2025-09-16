@@ -16,6 +16,7 @@ import androidx.navigation.findNavController
 import com.doaa.mosalam.librarymanagementsystem.R
 import com.doaa.mosalam.librarymanagementsystem.common.BasicFragment
 import com.doaa.mosalam.librarymanagementsystem.databinding.FragmentRegisterBinding
+import com.doaa.mosalam.librarymanagementsystem.ui.profile.UserPreferences
 import com.doaa.mosalam.librarymanagementsystem.ui.register.viewModel.RegisterViewModel
 import com.doaa.mosalam.librarymanagementsystem.utils.InputValidator
 import com.doaa.mosalam.librarymanagementsystem.utils.isEmailValid
@@ -25,11 +26,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RegisterFragment : BasicFragment<FragmentRegisterBinding, RegisterViewModel>(), TextWatcher {
+    override val viewModel: RegisterViewModel by viewModels()
+
     override fun getLayoutResID(): Int = R.layout.fragment_register
 
-    private val vm: RegisterViewModel by viewModels()
-    override val viewModel: RegisterViewModel
-        get() = vm
 
     private lateinit var checkIcon: Drawable
     private lateinit var progressDialog: ProgressDialog
@@ -48,15 +48,15 @@ class RegisterFragment : BasicFragment<FragmentRegisterBinding, RegisterViewMode
         initFocusListeners()
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            vm.isRegisterEnabled.collect { binding.btnRegister.isEnabled = it }
+            viewModel.isRegisterEnabled.collect { binding.btnRegister.isEnabled = it }
         }
 
         binding.btnRegister.setOnClickListener {
-            vm.registerUser()
+            viewModel.registerUser()
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            vm.uiState.collect { state ->
+            viewModel.uiState.collect { state ->
                 when (state) {
                     is RegisterViewModel.UiState.Loading -> {
 
@@ -71,6 +71,16 @@ class RegisterFragment : BasicFragment<FragmentRegisterBinding, RegisterViewMode
                             "Registration Successful",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        // 🟢 Save user data in SharedPreferences
+                        val userPrefs = UserPreferences(requireContext())
+                        userPrefs.saveUser(
+                            name = binding.edNameRegister.text.toString().trim(),
+                            email = binding.edEmailRegister.text.toString().trim(),
+                            phone = binding.edPhoneRegister.text.toString().trim(),
+                            password = binding.edPasswordRegister.text.toString().trim()
+                        )
+                        // navigate to login
                         view.findNavController()
                             .navigate(R.id.action_registerFragment_to_loginFragment)
                         if (progressDialog.isShowing) {
@@ -145,11 +155,11 @@ class RegisterFragment : BasicFragment<FragmentRegisterBinding, RegisterViewMode
     }
 
     override fun afterTextChanged(s: Editable?) {
-        vm.onNameChanged(binding.edNameRegister.text.toString())
-        vm.onPhoneChanged(binding.edPhoneRegister.text.toString())
-        vm.onEmailChanged(binding.edEmailRegister.text.toString())
-        vm.onPasswordChanged(binding.edPasswordRegister.text.toString())
-        vm.onConfirmPasswordChanged(binding.edConfirmPasswordRegister.text.toString())
+        viewModel.onNameChanged(binding.edNameRegister.text.toString())
+        viewModel.onPhoneChanged(binding.edPhoneRegister.text.toString())
+        viewModel.onEmailChanged(binding.edEmailRegister.text.toString())
+        viewModel.onPasswordChanged(binding.edPasswordRegister.text.toString())
+        viewModel.onConfirmPasswordChanged(binding.edConfirmPasswordRegister.text.toString())
     }
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}

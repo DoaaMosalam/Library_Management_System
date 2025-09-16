@@ -28,7 +28,8 @@ class MySelfFragment : BaseUserNameFragment<FragmentMySelfBinding, MySelfViewMod
     override fun navigateToPayments() {
         TODO("Not yet implemented")
     }
-//    val tabLayout: TabLayout by lazy { binding.tabLayout }
+
+    //    val tabLayout: TabLayout by lazy { binding.tabLayout }
 //    val viewPager: ViewPager2 by lazy { binding.viewPager }
     private lateinit var fVBookAdapter: FavoriteBooksAdapter
 
@@ -43,8 +44,6 @@ class MySelfFragment : BaseUserNameFragment<FragmentMySelfBinding, MySelfViewMod
         setupObservers()
 
         viewModel.observeFavorites()
-
-
 
 
 //        val adapter = BooksPagerAdapter(this)
@@ -87,9 +86,6 @@ class MySelfFragment : BaseUserNameFragment<FragmentMySelfBinding, MySelfViewMod
         }
 
     }
-
-
-
 
 
 }

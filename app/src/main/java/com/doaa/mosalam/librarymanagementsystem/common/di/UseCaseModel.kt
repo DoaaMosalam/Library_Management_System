@@ -32,4 +32,5 @@ object UseCaseModel {
     fun provideSearchUseCase(searchRepo: SearchRepo): SearchUseCase {
         return SearchUseCase(searchRepo)
     }
+
 }

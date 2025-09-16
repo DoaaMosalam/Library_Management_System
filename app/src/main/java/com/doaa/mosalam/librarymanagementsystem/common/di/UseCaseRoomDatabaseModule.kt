@@ -3,10 +3,12 @@ package com.doaa.mosalam.librarymanagementsystem.common.di
 import com.doaa.mosalam.domain.repo.DetailsRepo
 import com.doaa.mosalam.domain.repo.FavoriteRepo
 import com.doaa.mosalam.domain.repo.LoginRepo
+import com.doaa.mosalam.domain.repo.ProfileRepo
 import com.doaa.mosalam.domain.repo.RegisterRepo
 import com.doaa.mosalam.domain.useCase.DetailsUseCase
 import com.doaa.mosalam.domain.useCase.FavoriteUseCase
 import com.doaa.mosalam.domain.useCase.LoginUseCase
+import com.doaa.mosalam.domain.useCase.ProfileUseCase
 import com.doaa.mosalam.domain.useCase.RegisterUseCase
 import dagger.Module
 import dagger.Provides
@@ -45,5 +47,11 @@ object UseCaseRoomDatabaseModule {
             DetailsUseCase {
         return DetailsUseCase(detailsRepo)
 
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileUSeCase(profileRepo: ProfileRepo): ProfileUseCase {
+        return ProfileUseCase(profileRepo)
     }
 }
